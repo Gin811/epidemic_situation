@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yago.epidemic_management.model.dao.HodoMeterMapper">
+    <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.HodoMeter">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="cx_time" jdbcType="TIMESTAMP" property="cxTime"/>
+        <result column="place" jdbcType="VARCHAR" property="place"/>
+        <result column="bz" jdbcType="VARCHAR" property="bz"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , username, cx_time, place, bz, mobile
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from epidemic_situation_hodometer
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from epidemic_situation_hodometer
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.HodoMeter">
+        insert into epidemic_situation_hodometer (id, username, cx_time,
+                                                  place, bz, mobile)
+        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{cxTime,jdbcType=TIMESTAMP},
+                #{place,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.HodoMeter">
+        insert into epidemic_situation_hodometer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="cxTime != null">
+                cx_time,
+            </if>
+            <if test="place != null">
+                place,
+            </if>
+            <if test="bz != null">
+                bz,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="cxTime != null">
+                #{cxTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="place != null">
+                #{place,jdbcType=VARCHAR},
+            </if>
+            <if test="bz != null">
+                #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yago.epidemic_management.model.pojo.HodoMeter">
+        update epidemic_situation_hodometer
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="cxTime != null">
+                cx_time = #{cxTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="place != null">
+                place = #{place,jdbcType=VARCHAR},
+            </if>
+            <if test="bz != null">
+                bz = #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yago.epidemic_management.model.pojo.HodoMeter">
+        update epidemic_situation_hodometer
+        set username = #{username,jdbcType=VARCHAR},
+            cx_time  = #{cxTime,jdbcType=TIMESTAMP},
+            place    = #{place,jdbcType=VARCHAR},
+            bz       = #{bz,jdbcType=VARCHAR},
+            mobile   = #{mobile,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

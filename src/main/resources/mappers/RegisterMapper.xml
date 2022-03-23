@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yago.epidemic_management.model.dao.RegisterMapper">
+    <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.Register">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="szd" jdbcType="VARCHAR" property="szd"/>
+        <result column="stzk" jdbcType="VARCHAR" property="stzk"/>
+        <result column="grjc" jdbcType="VARCHAR" property="grjc"/>
+        <result column="bz" jdbcType="VARCHAR" property="bz"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="tw" jdbcType="VARCHAR" property="tw"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , `name`, phone, szd, stzk, grjc, bz, create_time, tw
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from epidemic_situation_register
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from epidemic_situation_register
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.Register">
+        insert into epidemic_situation_register (id, `name`, phone,
+                                                 szd, stzk, grjc, bz,
+                                                 create_time, tw)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+                #{szd,jdbcType=VARCHAR}, #{stzk,jdbcType=VARCHAR}, #{grjc,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{tw,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.Register">
+        insert into epidemic_situation_register
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="szd != null">
+                szd,
+            </if>
+            <if test="stzk != null">
+                stzk,
+            </if>
+            <if test="grjc != null">
+                grjc,
+            </if>
+            <if test="bz != null">
+                bz,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="tw != null">
+                tw,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="szd != null">
+                #{szd,jdbcType=VARCHAR},
+            </if>
+            <if test="stzk != null">
+                #{stzk,jdbcType=VARCHAR},
+            </if>
+            <if test="grjc != null">
+                #{grjc,jdbcType=VARCHAR},
+            </if>
+            <if test="bz != null">
+                #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tw != null">
+                #{tw,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yago.epidemic_management.model.pojo.Register">
+        update epidemic_situation_register
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="szd != null">
+                szd = #{szd,jdbcType=VARCHAR},
+            </if>
+            <if test="stzk != null">
+                stzk = #{stzk,jdbcType=VARCHAR},
+            </if>
+            <if test="grjc != null">
+                grjc = #{grjc,jdbcType=VARCHAR},
+            </if>
+            <if test="bz != null">
+                bz = #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tw != null">
+                tw = #{tw,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yago.epidemic_management.model.pojo.Register">
+        update epidemic_situation_register
+        set `name`      = #{name,jdbcType=VARCHAR},
+            phone       = #{phone,jdbcType=VARCHAR},
+            szd         = #{szd,jdbcType=VARCHAR},
+            stzk        = #{stzk,jdbcType=VARCHAR},
+            grjc        = #{grjc,jdbcType=VARCHAR},
+            bz          = #{bz,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            tw          = #{tw,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

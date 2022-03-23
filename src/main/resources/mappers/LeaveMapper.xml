@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yago.epidemic_management.model.dao.LeaveMapper">
+    <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.Leave">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="wc_time" jdbcType="TIMESTAMP" property="wcTime"/>
+        <result column="wc_yy" jdbcType="VARCHAR" property="wcYy"/>
+        <result column="wc_dd" jdbcType="VARCHAR" property="wcDd"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="bz" jdbcType="VARCHAR" property="bz"/>
+        <result column="stu" jdbcType="VARCHAR" property="stu"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , wc_time, wc_yy, wc_dd, username, phone, bz, stu
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from epidemic_situation_leave
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from epidemic_situation_leave
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.Leave">
+        insert into epidemic_situation_leave (id, wc_time, wc_yy,
+                                              wc_dd, username, phone,
+                                              bz, stu)
+        values (#{id,jdbcType=INTEGER}, #{wcTime,jdbcType=TIMESTAMP}, #{wcYy,jdbcType=VARCHAR},
+                #{wcDd,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+                #{bz,jdbcType=VARCHAR}, #{stu,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.Leave">
+        insert into epidemic_situation_leave
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="wcTime != null">
+                wc_time,
+            </if>
+            <if test="wcYy != null">
+                wc_yy,
+            </if>
+            <if test="wcDd != null">
+                wc_dd,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="bz != null">
+                bz,
+            </if>
+            <if test="stu != null">
+                stu,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="wcTime != null">
+                #{wcTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="wcYy != null">
+                #{wcYy,jdbcType=VARCHAR},
+            </if>
+            <if test="wcDd != null">
+                #{wcDd,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="bz != null">
+                #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="stu != null">
+                #{stu,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yago.epidemic_management.model.pojo.Leave">
+        update epidemic_situation_leave
+        <set>
+            <if test="wcTime != null">
+                wc_time = #{wcTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="wcYy != null">
+                wc_yy = #{wcYy,jdbcType=VARCHAR},
+            </if>
+            <if test="wcDd != null">
+                wc_dd = #{wcDd,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="bz != null">
+                bz = #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="stu != null">
+                stu = #{stu,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yago.epidemic_management.model.pojo.Leave">
+        update epidemic_situation_leave
+        set wc_time  = #{wcTime,jdbcType=TIMESTAMP},
+            wc_yy    = #{wcYy,jdbcType=VARCHAR},
+            wc_dd    = #{wcDd,jdbcType=VARCHAR},
+            username = #{username,jdbcType=VARCHAR},
+            phone    = #{phone,jdbcType=VARCHAR},
+            bz       = #{bz,jdbcType=VARCHAR},
+            stu      = #{stu,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

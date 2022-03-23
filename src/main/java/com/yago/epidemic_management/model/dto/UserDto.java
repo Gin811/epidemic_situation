@@ -1,0 +1,40 @@
+package com.yago.epidemic_management.model.dto;
+
+import lombok.Data;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
+
+/**
+ * @Author: Yago
+ * @Date: 2022/3/22 14:29
+ * Description:Dto是用于接受前端数据得类，用于服务层
+ **/
+@Data
+public class UserDto {
+    @NotNull(message = "userId不能为空")
+    private Integer userId;
+
+    @NotBlank(message = "username不能为null")
+    private String username;
+
+    @NotBlank(message = "password不能为null")
+    private String password;
+
+    @Email(message = "邮箱格式不对")
+    private String email;
+
+    @Size(min = 11, max = 11)
+    private String mobile;
+
+    @NotNull(message = "状态不能为空")
+    private Integer status;
+
+    @NotNull(message = "创建者id不能为空")
+    private Long createUserId;
+
+    private Date createTime;
+}
