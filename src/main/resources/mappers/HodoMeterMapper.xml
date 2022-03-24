@@ -103,4 +103,9 @@
             mobile   = #{mobile,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="selectHodeMeterList" resultType="com.yago.epidemic_management.model.pojo.HodoMeter">
+        select
+        <include refid="Base_Column_List"></include>
+        from epidemic_situation_hodometer
+    </select>
 </mapper>

@@ -61,6 +61,41 @@ public class UserController {
     }
 
     /**
+     * 管理员登录
+     *
+     * @param username
+     * @param password
+     * @param session
+     * @return
+     */
+    @ApiOperation("管理员登录")
+    @PostMapping("/adminLogin")
+    @ResponseBody
+    public ResultResponse adminLogin(@RequestParam("username") String username,
+                                     @RequestParam("password") String password, HttpSession session) {
+        //1.校验：判断用户名是否为空
+        if (StringUtils.isEmpty(username)) {
+            return ResultResponse.error(ExceptionEnum.NEED_USER_NAME);
+        }
+        //2.校验：判断密码是否为空
+        if (StringUtils.isEmpty(password)) {
+            return ResultResponse.error(ExceptionEnum.NEED_PASSWORD);
+        }
+        User user = userService.login(username, password);
+        //3.判断是否是管理员
+        if (userService.checkAdminRole(user)) {
+            //是管理员，可以执行操作
+            //保存用户信息时，不保存密码
+            user.setPassword(null);
+            //将用户信息存在session中
+            session.setAttribute(Constant.MPIDEMICMANAGEMENT_USER, user);
+            return ResultResponse.success(user);
+        } else {
+            return ResultResponse.error(ExceptionEnum.NEED_ADMIN);
+        }
+    }
+
+    /**
      * 普通用户注册
      *
      * @param username
@@ -90,7 +125,6 @@ public class UserController {
         return ResultResponse.success(user);
     }
 
-
     /**
      * 退出并清楚
      *
@@ -101,8 +135,12 @@ public class UserController {
     @PostMapping("/logout")
     @ResponseBody
     public ResultResponse logout(HttpSession session) {
+        if (session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER) == null) {
+            return ResultResponse.error(ExceptionEnum.NO_USER);
+        }
+        System.out.println(session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER));
         session.removeAttribute(Constant.MPIDEMICMANAGEMENT_USER);
+        System.out.println(session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER));
         return ResultResponse.success();
     }
-
 }

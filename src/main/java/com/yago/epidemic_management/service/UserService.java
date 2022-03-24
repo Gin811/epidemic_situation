@@ -22,4 +22,6 @@ public interface UserService {
     void update(User updateUser);
 
     void changUserStatus(Integer id, Integer newId);
+
+    void batchDeleteEgressUser(Integer[] ids, Integer status);
 }

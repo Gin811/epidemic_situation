@@ -26,5 +26,7 @@ public interface UserMapper {
 
     List<User> selectList();
 
-    int changUserStatus(@Param("id") Integer id, @Param("status") Integer newId);
+    int changUserStatus(@Param("id") Integer id, @Param("status") Integer newStatus);
+
+    int batchDeleteEgressUser(@Param("ids") Integer[] ids, @Param("status") Integer newStatus);
 }

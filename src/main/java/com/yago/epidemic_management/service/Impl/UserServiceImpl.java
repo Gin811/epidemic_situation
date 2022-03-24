@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     /**
-     * 测试接口
+     * 根据主键查询
      *
      * @return
      */
@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(String username, String password) {
 
+        //重名不允许注册
         User result = userMapper.selectByName(username);
         if (result != null) {
             throw new MyException(ExceptionEnum.NAME_EXISTED);
@@ -135,8 +136,31 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * 改变用户状态
+     *
+     * @param id
+     * @param newStatus
+     */
     @Override
-    public void changUserStatus(Integer id, Integer newId) {
-        userMapper.changUserStatus(id, newId);
+    public void changUserStatus(Integer id, Integer newStatus) {
+        int count = userMapper.changUserStatus(id, newStatus);
+        if (count == 0) {
+            throw new MyException(ExceptionEnum.DELETE_FAILED);
+        }
+    }
+
+    /**
+     * 批量设置禁用
+     *
+     * @param ids
+     * @param status
+     */
+    @Override
+    public void batchDeleteEgressUser(Integer[] ids, Integer status) {
+        int count = userMapper.batchDeleteEgressUser(ids, status);
+        if (count == 0) {
+            throw new MyException(ExceptionEnum.DELETE_FAILED);
+        }
     }
 }

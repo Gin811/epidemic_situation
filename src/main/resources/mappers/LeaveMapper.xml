@@ -127,4 +127,23 @@
             stu      = #{stu,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="selectLeaveList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from epidemic_situation_leave
+    </select>
+    <select id="selectByName" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from epidemic_situation_leave
+        where username=#{username}
+    </select>
+
+    <delete id="batchDeleteEgressUser">
+        delete from epidemic_situation_leave
+        where id in
+        <foreach collection="ids" open="(" item="id" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

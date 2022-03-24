@@ -2,6 +2,9 @@ package com.yago.epidemic_management.model.dao;
 
 import com.yago.epidemic_management.model.pojo.Leave;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface LeaveMapper {
@@ -16,4 +19,11 @@ public interface LeaveMapper {
     int updateByPrimaryKeySelective(Leave record);
 
     int updateByPrimaryKey(Leave record);
+
+    List<Leave> selectLeaveList();
+
+    Leave selectByName(String username);
+
+    int batchDeleteEgressUser(@Param("ids") Integer[] ids);
+
 }

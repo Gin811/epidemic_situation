@@ -17,6 +17,11 @@ public enum ExceptionEnum {
     NEED_LOGIN(10007, "需要登录"),
     UPDATE_FAILED(10008, "更新失败"),
     NEED_ADMIN(10009, "需要管理员权限"),
+    NO_USER(10010, "未登录"),
+    REQUEST_PARAM_ERROR(10011, "参数错误"),
+    DELETE_FAILED(10012, "删除失败"),
+    QUERY_FAILED(10013, "查询失败"),
+    NO_RECORD(10014, "没有这条记录"),
 
     //系统异常  20000
     SYSTEM_ERROR(20000, "系统异常");

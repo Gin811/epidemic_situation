@@ -138,4 +138,23 @@
             tw          = #{tw,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="selectByRegisterList" resultType="com.yago.epidemic_management.model.pojo.Register">
+        select
+        <include refid="Base_Column_List"></include>
+        from epidemic_situation_register
+    </select>
+    <select id="selectByName" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from epidemic_situation_register
+        where name=#{name}
+    </select>
+    <delete id="batchDelete">
+        delete from
+        epidemic_situation_register
+        where id in
+        <foreach collection="ids" open="(" item="id" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

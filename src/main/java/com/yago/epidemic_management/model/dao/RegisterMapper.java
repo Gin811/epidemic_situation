@@ -2,6 +2,9 @@ package com.yago.epidemic_management.model.dao;
 
 import com.yago.epidemic_management.model.pojo.Register;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface RegisterMapper {
@@ -16,4 +19,10 @@ public interface RegisterMapper {
     int updateByPrimaryKeySelective(Register record);
 
     int updateByPrimaryKey(Register record);
+
+    List<Register> selectByRegisterList();
+
+    Register selectByName(@Param("name") String username);
+
+    int batchDelete(@Param("ids") Integer[] ids);
 }

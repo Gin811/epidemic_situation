@@ -24,8 +24,10 @@ public class AdminFilterConfig {
         FilterRegistrationBean filterFilterRegistrationBean = new FilterRegistrationBean<>();
         filterFilterRegistrationBean.setFilter(adminFilter());
         //设置拦截路劲
-        filterFilterRegistrationBean.addUrlPatterns("/admin/userlist");
-        filterFilterRegistrationBean.addUrlPatterns("/admin/update");
+        filterFilterRegistrationBean.addUrlPatterns("/admin/*");
+//        filterFilterRegistrationBean.addUrlPatterns("/admin/update");
+//        filterFilterRegistrationBean.addUrlPatterns("/admin/delete");
+//        filterFilterRegistrationBean.addUrlPatterns("/admin/egresslist");
         //给【过滤器配置】设置名字，以便于区分不同的名字
         filterFilterRegistrationBean.setName("adminFilterConf");
         return filterFilterRegistrationBean;
