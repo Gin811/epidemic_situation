@@ -1,7 +1,9 @@
-package com.yago.epidemic_management.config;
+package com.yago.epidemic_management.common.config;
 
+import com.yago.epidemic_management.interceptor.UserLoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -33,5 +35,19 @@ public class MyMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/")
                 .addResourceLocations("classpath:/META-INF/resources/");
+    }
+
+    /**
+     * 注册自定义拦截器
+     *
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new UserLoginInterceptor())
+                .addPathPatterns("/admin/**")
+                .excludePathPatterns("/static/**")
+                .excludePathPatterns("/login")//开放登录路径
+                .excludePathPatterns("/adminLogin");//开放登录路径
     }
 }

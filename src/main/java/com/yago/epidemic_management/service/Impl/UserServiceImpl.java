@@ -5,9 +5,12 @@ import com.github.pagehelper.PageInfo;
 import com.yago.epidemic_management.exception.ExceptionEnum;
 import com.yago.epidemic_management.exception.MyException;
 import com.yago.epidemic_management.model.dao.UserMapper;
+import com.yago.epidemic_management.model.dto.AddUserDto;
 import com.yago.epidemic_management.model.pojo.User;
 import com.yago.epidemic_management.service.UserService;
+import com.yago.epidemic_management.utils.JWTUtils;
 import com.yago.epidemic_management.utils.MD5Utils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +38,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public User selectByName(String username) {
+        return userMapper.selectByName(username);
+    }
 
     /**
      * 用户注册
@@ -84,6 +91,8 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new MyException(ExceptionEnum.WRONG_PASSWORD);
         }
+        String token = JWTUtils.createToken(user.getUserId().toString());
+        user.setToken(token);
         return user;
     }
 
@@ -119,6 +128,45 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
+     * 查询管理员列表
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public PageInfo adminListForAdmin(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        //做查询工作
+        List<User> userList = userMapper.selectAdminList();
+        PageInfo pageInfo = new PageInfo(userList);
+        return pageInfo;
+    }
+
+    /**
+     * 添加用户
+     *
+     * @param addUserDto
+     */
+
+    @Override
+    public void addUser(AddUserDto addUserDto) {
+        //写到数据库
+        User user = new User();
+        BeanUtils.copyProperties(addUserDto, user);
+        try {
+            //直接输入密码不进行处理，存在安全隐患
+            user.setPassword(MD5Utils.getMD5Str(user.getPassword()));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        int count = userMapper.insertSelective(user);
+        if (count == 0) {
+            throw new MyException(ExceptionEnum.INSERT_FAILED);
+        }
+    }
+
+    /**
      * 更新用户
      *
      * @param updateUser
@@ -127,7 +175,7 @@ public class UserServiceImpl implements UserService {
     public void update(User updateUser) {
         User oldUser = userMapper.selectByName(updateUser.getUsername());
         //同名且不同id，不能继续修改
-        if (oldUser != null && oldUser.getUserId().equals(updateUser.getUserId())) {
+        if (oldUser != null && !oldUser.getUserId().equals(updateUser.getUserId())) {
             throw new MyException(ExceptionEnum.NAME_EXISTED);
         }
         int count = userMapper.updateByPrimaryKeySelective(updateUser);
@@ -137,14 +185,13 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 改变用户状态
+     * 根据id删除用户
      *
      * @param id
-     * @param newStatus
      */
     @Override
-    public void changUserStatus(Integer id, Integer newStatus) {
-        int count = userMapper.changUserStatus(id, newStatus);
+    public void deleteUser(Integer id) {
+        int count = userMapper.deleteUserByUserId(id);
         if (count == 0) {
             throw new MyException(ExceptionEnum.DELETE_FAILED);
         }

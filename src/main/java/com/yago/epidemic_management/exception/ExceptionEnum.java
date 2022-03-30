@@ -22,6 +22,8 @@ public enum ExceptionEnum {
     DELETE_FAILED(10012, "删除失败"),
     QUERY_FAILED(10013, "查询失败"),
     NO_RECORD(10014, "没有这条记录"),
+    NO_TOKEN(10015, "token已经过期"),
+    BAD_TOKEN(10016, "token认证失败"),
 
     //系统异常  20000
     SYSTEM_ERROR(20000, "系统异常");

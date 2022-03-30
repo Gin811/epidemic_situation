@@ -1,5 +1,7 @@
 package com.yago.epidemic_management.model.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Register {
@@ -17,9 +19,20 @@ public class Register {
 
     private String bz;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private String tw;
+
+    private String fourteenDay;
+
+    public String getFourteenDay() {
+        return fourteenDay;
+    }
+
+    public void setFourteenDay(String fourteenDay) {
+        this.fourteenDay = fourteenDay;
+    }
 
     public Integer getId() {
         return id;

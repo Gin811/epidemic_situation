@@ -33,6 +33,17 @@ public class UpdateRegisterDto {
     @NotBlank(message = "体温不能为空")
     private String tw;
 
+    @NotBlank(message = "最近14天信息不能为空")
+    private String fourteenDay;
+
+    public String getFourteenDay() {
+        return fourteenDay;
+    }
+
+    public void setFourteenDay(String fourteenDay) {
+        this.fourteenDay = fourteenDay;
+    }
+
     public Integer getId() {
         return id;
     }

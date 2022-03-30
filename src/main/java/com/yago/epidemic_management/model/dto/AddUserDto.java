@@ -1,5 +1,6 @@
 package com.yago.epidemic_management.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -34,5 +35,7 @@ public class AddUserDto {
     @NotNull(message = "创建者id不能为空")
     private Long createUserId;
 
+    @NotNull(message = "创建时间不能为空")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 }

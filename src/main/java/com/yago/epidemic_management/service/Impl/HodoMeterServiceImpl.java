@@ -39,4 +39,44 @@ public class HodoMeterServiceImpl implements HodoMeterService {
         }
         return hodoMeter;
     }
+
+    @Override
+    public void addUser(HodoMeter hodoMeter) {
+        int count = hodoMeterMapper.insertSelective(hodoMeter);
+        if (count == 0) {
+            throw new MyException(ExceptionEnum.INSERT_FAILED);
+        }
+    }
+
+    @Override
+    public void updateUser(HodoMeter hodoMeter) {
+        HodoMeter hodoMeter1 = hodoMeterMapper.selectName(hodoMeter.getUsername());
+        if (hodoMeter1 != null && !hodoMeter1.getId().equals(hodoMeter.getId())) {
+            throw new MyException(ExceptionEnum.UPDATE_FAILED);
+        }
+        int count = hodoMeterMapper.updateByPrimaryKeySelective(hodoMeter);
+        if (count == 0) {
+            throw new MyException(ExceptionEnum.UPDATE_FAILED);
+        }
+    }
+
+    @Override
+    public void deleteUser(Integer id) {
+        HodoMeter hodoMeter = hodoMeterMapper.selectByPrimaryKey(id);
+        if (hodoMeter == null) {
+            throw new MyException(ExceptionEnum.NO_RECORD);
+        }
+        int count = hodoMeterMapper.deleteByPrimaryKey(id);
+        if (count == 0) {
+            throw new MyException(ExceptionEnum.UPDATE_FAILED);
+        }
+    }
+
+    @Override
+    public void deleteUsers(Integer[] ids) {
+        int count = hodoMeterMapper.deleteUsers(ids);
+        if (count == 0) {
+            throw new MyException(ExceptionEnum.DELETE_FAILED);
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.yago.epidemic_management.model.dao;
 
 import com.yago.epidemic_management.model.pojo.HodoMeter;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,4 +21,8 @@ public interface HodoMeterMapper {
     int updateByPrimaryKey(HodoMeter record);
 
     List<HodoMeter> selectHodeMeterList();
+
+    HodoMeter selectName(@Param("username") String username);
+
+    int deleteUsers(@Param("ids") Integer[] ids);
 }

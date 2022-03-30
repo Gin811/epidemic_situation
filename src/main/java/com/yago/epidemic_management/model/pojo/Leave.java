@@ -1,10 +1,13 @@
 package com.yago.epidemic_management.model.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Leave {
     private Integer id;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date wcTime;
 
     private String wcYy;

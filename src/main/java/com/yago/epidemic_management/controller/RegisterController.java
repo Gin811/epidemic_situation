@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @Date: 2022/3/24 18:24
  * Description:     健康登记表
  **/
+@CrossOrigin
 @RestController
 @RequestMapping("/admin/register")
 public class RegisterController {

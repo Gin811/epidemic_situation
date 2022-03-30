@@ -161,16 +161,28 @@
                username,
                email,
                mobile,
+               status,
                create_user_id,
                create_time
         from epidemic_situation_user
-        where user_id!=1 and `status`!=0
+        where status!=2
     </select>
-    <update id="changUserStatus" parameterType="map">
-        update epidemic_situation_user
-        set `status` = #{status,jdbcType=TINYINT}
-        where user_id = #{id,jdbcType=INTEGER}
-    </update>
+    <select id="selectAdminList" resultMap="BaseResultMap">
+        select user_id,
+               username,
+               email,
+               mobile,
+               status,
+               create_user_id,
+               create_time
+        from epidemic_situation_user
+        where status = 2
+    </select>
+    <delete id="deleteUserByUserId" parameterType="java.lang.Integer">
+        delete
+        from epidemic_situation_user
+        where user_id = #{id}
+    </delete>
 
     <update id="batchDeleteEgressUser">
         update epidemic_situation_user

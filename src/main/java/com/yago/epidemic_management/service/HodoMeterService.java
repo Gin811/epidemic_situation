@@ -12,4 +12,12 @@ public interface HodoMeterService {
     PageInfo getHodeMeterList(Integer pageNum, Integer pageSize);
 
     HodoMeter getHodeMeter(Integer id);
+
+    void addUser(HodoMeter hodoMeter);
+
+    void updateUser(HodoMeter hodoMeter);
+
+    void deleteUser(Integer id);
+
+    void deleteUsers(Integer[] ids);
 }

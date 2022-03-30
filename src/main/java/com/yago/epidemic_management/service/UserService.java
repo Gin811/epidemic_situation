@@ -1,6 +1,7 @@
 package com.yago.epidemic_management.service;
 
 import com.github.pagehelper.PageInfo;
+import com.yago.epidemic_management.model.dto.AddUserDto;
 import com.yago.epidemic_management.model.pojo.User;
 
 /**
@@ -11,6 +12,8 @@ import com.yago.epidemic_management.model.pojo.User;
 public interface UserService {
     User selectByPrimaryKey(Integer id);
 
+    User selectByName(String username);
+
     void register(String userName, String password);
 
     User login(String userName, String password);
@@ -19,9 +22,13 @@ public interface UserService {
 
     PageInfo userListForAdmin(Integer pageNum, Integer pageSize);
 
+    PageInfo adminListForAdmin(Integer pageNum, Integer pageSize);
+
+    void addUser(AddUserDto addUserDto);
+
     void update(User updateUser);
 
-    void changUserStatus(Integer id, Integer newId);
+    void deleteUser(Integer id);
 
     void batchDeleteEgressUser(Integer[] ids, Integer status);
 }

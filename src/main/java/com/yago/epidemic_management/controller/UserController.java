@@ -3,18 +3,21 @@ package com.yago.epidemic_management.controller;
 import com.yago.epidemic_management.common.Constant;
 import com.yago.epidemic_management.common.ResultResponse;
 import com.yago.epidemic_management.exception.ExceptionEnum;
+import com.yago.epidemic_management.model.dto.UserDto;
 import com.yago.epidemic_management.model.pojo.User;
 import com.yago.epidemic_management.service.UserService;
+import com.yago.epidemic_management.utils.JWTUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * @Author: Yago
@@ -22,6 +25,7 @@ import javax.servlet.http.HttpSession;
  * Description:
  **/
 @Controller
+@CrossOrigin
 public class UserController {
     @Autowired
     UserService userService;
@@ -63,16 +67,16 @@ public class UserController {
     /**
      * 管理员登录
      *
-     * @param username
-     * @param password
+     * @param userDto
      * @param session
      * @return
      */
     @ApiOperation("管理员登录")
     @PostMapping("/adminLogin")
     @ResponseBody
-    public ResultResponse adminLogin(@RequestParam("username") String username,
-                                     @RequestParam("password") String password, HttpSession session) {
+    public ResultResponse adminLogin(@Validated @RequestBody UserDto userDto, HttpSession session, HttpServletResponse response) {
+        String username = userDto.getUsername();
+        String password = userDto.getPassword();
         //1.校验：判断用户名是否为空
         if (StringUtils.isEmpty(username)) {
             return ResultResponse.error(ExceptionEnum.NEED_USER_NAME);
@@ -88,7 +92,11 @@ public class UserController {
             //保存用户信息时，不保存密码
             user.setPassword(null);
             //将用户信息存在session中
-            session.setAttribute(Constant.MPIDEMICMANAGEMENT_USER, user);
+//            response.setHeader("Authorization", Constant.MPIDEMICMANAGEMENT_USER);
+//            response.setHeader("Access-control-Expose-Headers", "Authorization");
+            response.setHeader(JWTUtils.USER_LOGIN_TOKEN, user.getToken());
+            response.setHeader("Access-control-Expose-Headers", "USER_LOGIN_TOKEN");
+//            session.setAttribute(Constant.MPIDEMICMANAGEMENT_USER, user);
             return ResultResponse.success(user);
         } else {
             return ResultResponse.error(ExceptionEnum.NEED_ADMIN);
@@ -98,16 +106,16 @@ public class UserController {
     /**
      * 普通用户注册
      *
-     * @param username
-     * @param password
+     * @param user1
      * @param session
      * @return
      */
     @ApiOperation("用户登录")
     @PostMapping("/login")
     @ResponseBody
-    public ResultResponse login(@RequestParam("username") String username,
-                                @RequestParam("password") String password, HttpSession session) {
+    public ResultResponse login(@RequestBody Map<String, String> user1, HttpSession session) {
+        String username = user1.get("username");
+        String password = user1.get("password");
         //1.校验：判断用户名是否为空
         if (StringUtils.isEmpty(username)) {
             return ResultResponse.error(ExceptionEnum.NEED_USER_NAME);
@@ -122,25 +130,29 @@ public class UserController {
         user.setPassword(null);
         //将用户信息存在session中
         session.setAttribute(Constant.MPIDEMICMANAGEMENT_USER, user);
+
         return ResultResponse.success(user);
     }
 
     /**
      * 退出并清楚
      *
-     * @param session
+     * @param
      * @return
      */
     @ApiOperation("用户注销")
     @PostMapping("/logout")
     @ResponseBody
-    public ResultResponse logout(HttpSession session) {
-        if (session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER) == null) {
-            return ResultResponse.error(ExceptionEnum.NO_USER);
-        }
-        System.out.println(session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER));
+    public ResultResponse logout(HttpServletRequest request) {
+//        if (session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER) == null) {
+//            return ResultResponse.error(ExceptionEnum.NO_USER);
+//        }
+
+        HttpSession session = request.getSession();
+
+        System.out.println("session为：" + session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER));
         session.removeAttribute(Constant.MPIDEMICMANAGEMENT_USER);
-        System.out.println(session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER));
+        System.out.println("session为：" + session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER));
         return ResultResponse.success();
     }
 }

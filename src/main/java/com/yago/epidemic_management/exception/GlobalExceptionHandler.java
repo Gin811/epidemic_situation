@@ -28,21 +28,39 @@ public class GlobalExceptionHandler {
 
     private final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(Exception.class)  //拦截所有异常,一般情况下一个方法特定处理一种异常
+    /**
+     * //拦截未知所有异常,一般情况下一个方法特定处理一种异常
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
     @ResponseBody
     public Object handleException(Exception e) {
         log.error("Default Exception:", e);
         return ResultResponse.error(ExceptionEnum.SYSTEM_ERROR);
     }
 
-    @ExceptionHandler(MyException.class)    //拦截自定义业务异常,一般情况下一个方法特定处理一种异常
+    /**
+     * 拦截自定义业务异常,一般情况下一个方法特定处理一种异常
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(MyException.class)
     @ResponseBody
     public ResultResponse handleMyException(MyException e) {
         log.error("MyException:", e);
         return ResultResponse.error(e.getCode(), e.getMessage());
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)       //拦截检验信息异常,一般情况下一个方法特定处理一种异常
+    /**
+     * 拦截检验信息异常,一般情况下一个方法特定处理一种异常
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     public ResultResponse handleMethodArgumentNotValidException(
             MethodArgumentNotValidException e) {

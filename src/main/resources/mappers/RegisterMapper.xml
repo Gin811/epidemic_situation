@@ -11,6 +11,7 @@
         <result column="bz" jdbcType="VARCHAR" property="bz"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="tw" jdbcType="VARCHAR" property="tw"/>
+        <result column="14day" jdbcType="VARCHAR" property="fourteenDay"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
@@ -30,10 +31,11 @@
     <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.Register">
         insert into epidemic_situation_register (id, `name`, phone,
                                                  szd, stzk, grjc, bz,
-                                                 create_time, tw)
+                                                 create_time, tw, fourteenDay)
         values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
                 #{szd,jdbcType=VARCHAR}, #{stzk,jdbcType=VARCHAR}, #{grjc,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR},
-                #{createTime,jdbcType=TIMESTAMP}, #{tw,jdbcType=VARCHAR})
+                #{createTime,jdbcType=TIMESTAMP}, #{tw,jdbcType=VARCHAR},
+                #{fourteenDay,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.Register">
         insert into epidemic_situation_register
@@ -65,6 +67,9 @@
             <if test="tw != null">
                 tw,
             </if>
+            <if test="fourteenDay != null">
+                fourteen_day,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -93,6 +98,9 @@
             </if>
             <if test="tw != null">
                 #{tw,jdbcType=VARCHAR},
+            </if>
+            <if test="fourteenDay != null">
+                #{fourteenDay,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -123,6 +131,9 @@
             <if test="tw != null">
                 tw = #{tw,jdbcType=VARCHAR},
             </if>
+            <if test="fourteenDay != null">
+                #{fourteenDay,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -135,7 +146,8 @@
             grjc        = #{grjc,jdbcType=VARCHAR},
             bz          = #{bz,jdbcType=VARCHAR},
             create_time = #{createTime,jdbcType=TIMESTAMP},
-            tw          = #{tw,jdbcType=VARCHAR}
+            tw          = #{tw,jdbcType=VARCHAR},
+            fourteen_day= #{fourteenDay,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
     <select id="selectByRegisterList" resultType="com.yago.epidemic_management.model.pojo.Register">

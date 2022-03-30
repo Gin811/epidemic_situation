@@ -108,4 +108,18 @@
         <include refid="Base_Column_List"></include>
         from epidemic_situation_hodometer
     </select>
+    <select id="selectName" parameterType="string" resultType="com.yago.epidemic_management.model.pojo.HodoMeter">
+        select
+        <include refid="Base_Column_List"></include>
+        from epidemic_situation_hodometer
+        where username=#{username}
+
+    </select>
+    <delete id="deleteUsers">
+        delete from epidemic_situation_hodometer
+        where id in
+        <foreach collection="ids" open="(" item="id" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @Date: 2022/3/24 9:35
  * Description: 人员外出控制器
  **/
+@CrossOrigin
 @RestController
 @RequestMapping("/admin/leave")
 public class LeaveController {

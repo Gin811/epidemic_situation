@@ -1,5 +1,7 @@
 package com.yago.epidemic_management.model.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class HodoMeter {
@@ -7,6 +9,7 @@ public class HodoMeter {
 
     private String username;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date cxTime;
 
     private String place;
