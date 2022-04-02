@@ -28,7 +28,7 @@ public class UpdateRegisterDto {
 
     @NotNull(message = "时间不能为空")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+    private Date create_time;
 
     @NotBlank(message = "体温不能为空")
     private String tw;
@@ -101,11 +101,11 @@ public class UpdateRegisterDto {
     }
 
     public Date getCreateTime() {
-        return createTime;
+        return create_time;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreateTime(Date create_time) {
+        this.create_time = create_time;
     }
 
     public String getTw() {

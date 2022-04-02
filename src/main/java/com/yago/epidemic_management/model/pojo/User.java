@@ -22,7 +22,7 @@ public class User {
     private Long createUserId;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+    private Date create_time;
 
     private String token;
 
@@ -99,11 +99,11 @@ public class User {
     }
 
     public Date getCreateTime() {
-        return createTime;
+        return create_time;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreateTime(Date create_time) {
+        this.create_time = create_time;
     }
 
     @Override
@@ -117,7 +117,7 @@ public class User {
                 ", mobile='" + mobile + '\'' +
                 ", status=" + status +
                 ", createUserId=" + createUserId +
-                ", createTime=" + createTime +
+                ", create_time=" + create_time +
                 '}';
     }
 }

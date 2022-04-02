@@ -81,7 +81,7 @@ public class AdminController {
     }
 
     /**
-     * 后台更新列表
+     * 后台更新用户
      *
      * @param userDto
      * @return

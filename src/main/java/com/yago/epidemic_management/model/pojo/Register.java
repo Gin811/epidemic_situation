@@ -20,18 +20,18 @@ public class Register {
     private String bz;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+    private Date create_time;
 
     private String tw;
 
-    private String fourteenDay;
+    private String fourteen_day;
 
     public String getFourteenDay() {
-        return fourteenDay;
+        return fourteen_day;
     }
 
     public void setFourteenDay(String fourteenDay) {
-        this.fourteenDay = fourteenDay;
+        this.fourteen_day = fourteenDay;
     }
 
     public Integer getId() {
@@ -91,11 +91,11 @@ public class Register {
     }
 
     public Date getCreateTime() {
-        return createTime;
+        return create_time;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreateTime(Date create_time) {
+        this.create_time = create_time;
     }
 
     public String getTw() {

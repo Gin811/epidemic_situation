@@ -33,8 +33,8 @@ public class UserController {
     @ApiOperation("测试接口")
     @GetMapping("/test")
     @ResponseBody
-    public User getUser(Integer id) {
-        return userService.selectByPrimaryKey(id);
+    public User getUser(String username) {
+        return userService.selectByName(username);
     }
 
     /**
