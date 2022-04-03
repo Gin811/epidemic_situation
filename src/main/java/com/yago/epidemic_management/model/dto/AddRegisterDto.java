@@ -24,7 +24,7 @@ public class AddRegisterDto {
 
     private String bz;
 
-    @NotNull(message = "时间不能为空")
+    @NotNull(message = "创建时间不能为空")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date create_time;
 

@@ -3,6 +3,7 @@ package com.yago.epidemic_management.model.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class AddHodoMeter {
@@ -10,6 +11,7 @@ public class AddHodoMeter {
     @NotBlank(message = "姓名不能为空")
     private String username;
 
+    @NotNull(message = "出行时间不能为空")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date cxTime;
 

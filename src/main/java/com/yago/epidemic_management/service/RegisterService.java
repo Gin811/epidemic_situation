@@ -11,6 +11,8 @@ import com.yago.epidemic_management.model.pojo.Register;
 public interface RegisterService {
     PageInfo getRegisterList(Integer pageNum, Integer pageSize);
 
+    Register selectByName(String username);
+
     Register selectRegisterUser(Integer id);
 
     void updateRegisterUser(Register registerUser);

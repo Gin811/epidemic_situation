@@ -22,7 +22,7 @@ public interface HodoMeterMapper {
 
     List<HodoMeter> selectHodeMeterList();
 
-    HodoMeter selectName(@Param("username") String username);
+    HodoMeter selectByName(@Param("username") String username);
 
     int deleteUsers(@Param("ids") Integer[] ids);
 }

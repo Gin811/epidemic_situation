@@ -11,7 +11,6 @@ public class UpdateHodoMeter {
     @NotNull(message = "id不能为空")
     private Integer id;
 
-
     @NotBlank(message = "姓名不能为空")
     private String username;
 

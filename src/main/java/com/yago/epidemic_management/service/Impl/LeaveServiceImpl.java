@@ -39,6 +39,17 @@ public class LeaveServiceImpl implements LeaveService {
     }
 
     /**
+     * 根据名字搜索离开的人员
+     *
+     * @param username
+     * @return
+     */
+    @Override
+    public Leave selectByName(String username) {
+        return leaveMapper.selectByName(username);
+    }
+
+    /**
      * 获取外出人员详情
      *
      * @param id

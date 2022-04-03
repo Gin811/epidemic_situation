@@ -32,6 +32,11 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
+    public Register selectByName(String username) {
+        return registerMapper.selectByName(username);
+    }
+
+    @Override
     public Register selectRegisterUser(Integer id) {
         Register register = registerMapper.selectByPrimaryKey(id);
         if (register == null) {

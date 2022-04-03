@@ -32,6 +32,11 @@ public class HodoMeterServiceImpl implements HodoMeterService {
     }
 
     @Override
+    public HodoMeter selectByName(String username) {
+        return hodoMeterMapper.selectByName(username);
+    }
+
+    @Override
     public HodoMeter getHodeMeter(Integer id) {
         HodoMeter hodoMeter = hodoMeterMapper.selectByPrimaryKey(id);
         if (hodoMeter == null) {
@@ -50,7 +55,7 @@ public class HodoMeterServiceImpl implements HodoMeterService {
 
     @Override
     public void updateUser(HodoMeter hodoMeter) {
-        HodoMeter hodoMeter1 = hodoMeterMapper.selectName(hodoMeter.getUsername());
+        HodoMeter hodoMeter1 = hodoMeterMapper.selectByName(hodoMeter.getUsername());
         if (hodoMeter1 != null && !hodoMeter1.getId().equals(hodoMeter.getId())) {
             throw new MyException(ExceptionEnum.UPDATE_FAILED);
         }

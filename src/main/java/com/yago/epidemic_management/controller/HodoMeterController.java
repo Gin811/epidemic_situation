@@ -25,10 +25,17 @@ public class HodoMeterController {
     HodoMeterService hodoMeterService;
 
     @ApiOperation("所有外出信息列表")
-    @PostMapping("/getHodoMeterList")
-    public ResultResponse getHodoMeterList(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize) {
-        PageInfo hodeMeterList = hodoMeterService.getHodeMeterList(pageNum, pageSize);
-        return ResultResponse.success(hodeMeterList);
+    @GetMapping("/getHodoMeterList")
+    public ResultResponse getHodoMeterList(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, String username) {
+
+        if (username.isEmpty()) {
+            PageInfo hodeMeterList = hodoMeterService.getHodeMeterList(pageNum, pageSize);
+            return ResultResponse.success(hodeMeterList);
+        } else {
+            HodoMeter hodoMeter = hodoMeterService.selectByName(username);
+            System.out.println(hodoMeter.getCx_time());
+            return ResultResponse.success(hodoMeter);
+        }
     }
 
     @ApiOperation("单人外出信息详情")

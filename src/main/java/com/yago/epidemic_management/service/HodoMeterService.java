@@ -11,6 +11,8 @@ import com.yago.epidemic_management.model.pojo.HodoMeter;
 public interface HodoMeterService {
     PageInfo getHodeMeterList(Integer pageNum, Integer pageSize);
 
+    HodoMeter selectByName(String username);
+
     HodoMeter getHodeMeter(Integer id);
 
     void addUser(HodoMeter hodoMeter);

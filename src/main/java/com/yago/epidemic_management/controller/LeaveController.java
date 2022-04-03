@@ -32,10 +32,15 @@ public class LeaveController {
      * @return
      */
     @ApiOperation("外出人员列表")
-    @PostMapping("/egresslist")
-    public ResultResponse getLeaveList(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize) {
-        PageInfo leaveList = leaveService.getLeaveList(pageNum, pageSize);
-        return ResultResponse.success(leaveList);
+    @GetMapping("/egressList")
+    public ResultResponse getLeaveList(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, String username) {
+        if (username.isEmpty()) {
+            PageInfo leaveList = leaveService.getLeaveList(pageNum, pageSize);
+            return ResultResponse.success(leaveList);
+        } else {
+            Leave leave = leaveService.selectByName(username);
+            return ResultResponse.success(leave);
+        }
     }
 
     /**

@@ -27,10 +27,15 @@ public class RegisterController {
 
     @ApiOperation("健康登记人员列表")
     @GetMapping("/registerList")
-    public ResultResponse getRegisterList(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize) {
+    public ResultResponse getRegisterList(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, String username) {
 
-        PageInfo registerList = registerService.getRegisterList(pageNum, pageSize);
-        return ResultResponse.success(registerList);
+        if (username.isEmpty()) {
+            PageInfo registerList = registerService.getRegisterList(pageNum, pageSize);
+            return ResultResponse.success(registerList);
+        } else {
+            Register register = registerService.selectByName(username);
+            return ResultResponse.success(register);
+        }
     }
 
     @ApiOperation("个人健康登记详情")
