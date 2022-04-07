@@ -26,7 +26,7 @@ public class RegisterServiceImpl implements RegisterService {
     @Override
     public PageInfo getRegisterList(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Register> registerList = registerMapper.selectByRegisterList();
+        List<Register> registerList = registerMapper.selectRegisterList();
         PageInfo pageInfo = new PageInfo(registerList);
         return pageInfo;
     }

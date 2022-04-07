@@ -11,7 +11,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -74,9 +73,11 @@ public class UserController {
     @ApiOperation("管理员登录")
     @PostMapping("/adminLogin")
     @ResponseBody
-    public ResultResponse adminLogin(@Validated @RequestBody UserDto userDto, HttpSession session, HttpServletResponse response) {
+    public ResultResponse adminLogin(@RequestBody UserDto userDto, HttpSession session, HttpServletResponse response) {
         String username = userDto.getUsername();
         String password = userDto.getPassword();
+        System.out.println(username);
+        System.out.println(password);
         //1.校验：判断用户名是否为空
         if (StringUtils.isEmpty(username)) {
             return ResultResponse.error(ExceptionEnum.NEED_USER_NAME);

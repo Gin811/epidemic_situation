@@ -29,6 +29,7 @@ public class LeaveController {
      *
      * @param pageNum
      * @param pageSize
+     * @param username
      * @return
      */
     @ApiOperation("外出人员列表")
@@ -36,6 +37,26 @@ public class LeaveController {
     public ResultResponse getLeaveList(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, String username) {
         if (username.isEmpty()) {
             PageInfo leaveList = leaveService.getLeaveList(pageNum, pageSize);
+            return ResultResponse.success(leaveList);
+        } else {
+            Leave leave = leaveService.selectByName(username);
+            return ResultResponse.success(leave);
+        }
+    }
+
+    /**
+     * 处理外出申请
+     *
+     * @param pageNum
+     * @param pageSize
+     * @param username
+     * @return
+     */
+    @ApiOperation("处理人员外出申请")
+    @GetMapping("/processingApplications")
+    public ResultResponse ProcessingApplications(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, String username) {
+        if (username.isEmpty()) {
+            PageInfo leaveList = leaveService.getApplications(pageNum, pageSize);
             return ResultResponse.success(leaveList);
         } else {
             Leave leave = leaveService.selectByName(username);
@@ -87,8 +108,8 @@ public class LeaveController {
      * @return
      */
     @ApiOperation("删除外出人员")
-    @PostMapping("/deleteEgressUser")
-    public ResultResponse deleteEgressUser(@RequestParam("id") Integer id) {
+    @GetMapping("/deleteEgressUser/{id}")
+    public ResultResponse deleteEgressUser(@PathVariable("id") Integer id) {
         leaveService.deleteEgressUser(id);
         return ResultResponse.success();
     }

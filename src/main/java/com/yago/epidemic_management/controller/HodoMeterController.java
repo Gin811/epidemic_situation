@@ -64,8 +64,8 @@ public class HodoMeterController {
     }
 
     @ApiOperation("删除个人外出信息")
-    @GetMapping("delete")
-    public ResultResponse deteleUser(@RequestParam Integer id) {
+    @GetMapping("delete/{id}")
+    public ResultResponse deteleUser(@PathVariable Integer id) {
         hodoMeterService.deleteUser(id);
         return ResultResponse.success();
     }

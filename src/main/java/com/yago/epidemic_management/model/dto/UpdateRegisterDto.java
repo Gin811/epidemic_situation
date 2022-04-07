@@ -28,13 +28,21 @@ public class UpdateRegisterDto {
 
     @NotNull(message = "时间不能为空")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date create_time;
+    private Date createTime;
 
     @NotBlank(message = "体温不能为空")
     private String tw;
 
     @NotBlank(message = "最近14天信息不能为空")
     private String fourteenDay;
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     public String getFourteenDay() {
         return fourteenDay;
@@ -98,14 +106,6 @@ public class UpdateRegisterDto {
 
     public void setBz(String bz) {
         this.bz = bz == null ? null : bz.trim();
-    }
-
-    public Date getCreateTime() {
-        return create_time;
-    }
-
-    public void setCreateTime(Date create_time) {
-        this.create_time = create_time;
     }
 
     public String getTw() {

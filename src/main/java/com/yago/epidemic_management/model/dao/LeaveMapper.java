@@ -22,6 +22,8 @@ public interface LeaveMapper {
 
     List<Leave> selectLeaveList();
 
+    List<Leave> selectApplications();
+
     Leave selectByName(String username);
 
     int batchDeleteEgressUser(@Param("ids") Integer[] ids);

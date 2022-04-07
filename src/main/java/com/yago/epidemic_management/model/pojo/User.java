@@ -22,17 +22,9 @@ public class User {
     private Long createUserId;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date create_time;
+    private Date createTime;
 
     private String token;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 
     public Integer getUserId() {
         return userId;
@@ -47,7 +39,7 @@ public class User {
     }
 
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+        this.username = username;
     }
 
     public String getPassword() {
@@ -55,7 +47,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+        this.password = password;
     }
 
     public String getSalt() {
@@ -63,7 +55,7 @@ public class User {
     }
 
     public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
+        this.salt = salt;
     }
 
     public String getEmail() {
@@ -71,7 +63,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email;
     }
 
     public String getMobile() {
@@ -79,7 +71,7 @@ public class User {
     }
 
     public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
+        this.mobile = mobile;
     }
 
     public Integer getStatus() {
@@ -99,25 +91,18 @@ public class User {
     }
 
     public Date getCreateTime() {
-        return create_time;
+        return createTime;
     }
 
-    public void setCreateTime(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
-                ", email='" + email + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", status=" + status +
-                ", createUserId=" + createUserId +
-                ", create_time=" + create_time +
-                '}';
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

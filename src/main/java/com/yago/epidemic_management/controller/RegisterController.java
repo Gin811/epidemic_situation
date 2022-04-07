@@ -64,8 +64,8 @@ public class RegisterController {
     }
 
     @ApiOperation("删除个人健康信息")
-    @PostMapping("delete")
-    public ResultResponse deleteRegisterUser(@RequestParam("id") Integer id) {
+    @PostMapping("delete/{id}")
+    public ResultResponse deleteRegisterUser(@PathVariable("id") Integer id) {
         registerService.deleteRegisterUser(id);
         return ResultResponse.success();
     }

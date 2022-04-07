@@ -9,9 +9,9 @@
         <result column="stzk" jdbcType="VARCHAR" property="stzk"/>
         <result column="grjc" jdbcType="VARCHAR" property="grjc"/>
         <result column="bz" jdbcType="VARCHAR" property="bz"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="create_time"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="tw" jdbcType="VARCHAR" property="tw"/>
-        <result column="fourteen_day" jdbcType="VARCHAR" property="fourteen_day"/>
+        <result column="fourteen_day" jdbcType="VARCHAR" property="fourteenDay"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
@@ -31,10 +31,10 @@
     <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.Register">
         insert into epidemic_situation_register (id, `name`, phone,
                                                  szd, stzk, grjc, bz,
-                                                 create_time, tw, fourteenDay)
+                                                 create_time, tw, fourteen_day)
         values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
                 #{szd,jdbcType=VARCHAR}, #{stzk,jdbcType=VARCHAR}, #{grjc,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR},
-                #{create_time,jdbcType=TIMESTAMP}, #{tw,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{tw,jdbcType=VARCHAR},
                 #{fourteenDay,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.Register">
@@ -61,7 +61,7 @@
             <if test="bz != null">
                 bz,
             </if>
-            <if test="create_time != null">
+            <if test="createTime != null">
                 create_time,
             </if>
             <if test="tw != null">
@@ -93,8 +93,8 @@
             <if test="bz != null">
                 #{bz,jdbcType=VARCHAR},
             </if>
-            <if test="create_time != null">
-                #{create_time,jdbcType=TIMESTAMP},
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="tw != null">
                 #{tw,jdbcType=VARCHAR},
@@ -125,14 +125,14 @@
             <if test="bz != null">
                 bz = #{bz,jdbcType=VARCHAR},
             </if>
-            <if test="create_time != null">
-                create_time = #{create_time,jdbcType=TIMESTAMP},
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="tw != null">
                 tw = #{tw,jdbcType=VARCHAR},
             </if>
             <if test="fourteenDay != null">
-                #{fourteenDay,jdbcType=VARCHAR},
+                fourteen_day=#{fourteenDay,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -145,12 +145,12 @@
             stzk        = #{stzk,jdbcType=VARCHAR},
             grjc        = #{grjc,jdbcType=VARCHAR},
             bz          = #{bz,jdbcType=VARCHAR},
-            create_time = #{create_time,jdbcType=TIMESTAMP},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
             tw          = #{tw,jdbcType=VARCHAR},
             fourteen_day= #{fourteenDay,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <select id="selectByRegisterList" resultType="com.yago.epidemic_management.model.pojo.Register">
+    <select id="selectRegisterList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"></include>
         from epidemic_situation_register

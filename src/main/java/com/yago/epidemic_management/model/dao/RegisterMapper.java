@@ -20,7 +20,7 @@ public interface RegisterMapper {
 
     int updateByPrimaryKey(Register record);
 
-    List<Register> selectByRegisterList();
+    List<Register> selectRegisterList();
 
     Register selectByName(@Param("name") String username);
 

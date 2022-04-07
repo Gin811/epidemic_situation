@@ -17,14 +17,6 @@ public class UserDto implements Serializable {
 
     private String token;
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -39,5 +31,13 @@ public class UserDto implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

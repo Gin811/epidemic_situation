@@ -132,6 +132,12 @@
         <include refid="Base_Column_List"/>
         from epidemic_situation_leave
     </select>
+    <select id="selectApplications" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from epidemic_situation_leave
+        where stu!="已审核"
+    </select>
     <select id="selectByName" parameterType="string" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"></include>

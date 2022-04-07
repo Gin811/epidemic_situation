@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yago.epidemic_management.model.dao.InfoMapper">
+    <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.Info">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , user_name, title, content, create_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from epidemic_situation_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByUserName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from epidemic_situation_info
+        where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAllInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from epidemic_situation_info
+    </select>
+    <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.Info">
+        insert into epidemic_situation_info (user_name, title, content,
+                                             create_time)
+        values (#{userName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+                #{content,jdbcType=VARCHAR}
+    </insert>
+    <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.Info">
+        insert into epidemic_situation_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null">
+                #{userName,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yago.epidemic_management.model.pojo.Info">
+        update epidemic_situation_info
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteInfo">
+        delete
+        from epidemic_situation_info
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+</mapper>

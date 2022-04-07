@@ -11,6 +11,8 @@ import com.yago.epidemic_management.model.pojo.Leave;
 public interface LeaveService {
     PageInfo getLeaveList(Integer pageNum, Integer pageSize);
 
+    PageInfo getApplications(Integer pageNum, Integer pageSize);
+
     Leave selectByName(String username);
 
     Leave selectByPrimaryKey(Integer id);

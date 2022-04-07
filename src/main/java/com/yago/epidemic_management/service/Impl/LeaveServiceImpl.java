@@ -38,6 +38,14 @@ public class LeaveServiceImpl implements LeaveService {
         return pageInfo;
     }
 
+    @Override
+    public PageInfo getApplications(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Leave> leaveList = leaveMapper.selectApplications();
+        PageInfo pageInfo = new PageInfo(leaveList);
+        return pageInfo;
+    }
+
     /**
      * 根据名字搜索离开的人员
      *
@@ -76,7 +84,7 @@ public class LeaveServiceImpl implements LeaveService {
         if (oldLeave != null && !oldLeave.getId().equals(leaveUser.getId())) {
             throw new MyException(ExceptionEnum.NAME_EXISTED);
         } else {
-            int count = leaveMapper.updateByPrimaryKey(leaveUser);
+            int count = leaveMapper.updateByPrimaryKeySelective(leaveUser);
             if (count == 0) {
                 throw new MyException(ExceptionEnum.UPDATE_FAILED);
             }

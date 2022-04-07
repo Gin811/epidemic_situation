@@ -39,6 +39,6 @@ public class UpdateUserDto implements Serializable {
 
     @NotNull(message = "更新时间不能为空")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date create_time;
+    private Date createTime;
 
 }
