@@ -6,6 +6,7 @@ import com.yago.epidemic_management.model.dto.QueryInfoDto;
 import com.yago.epidemic_management.model.dto.UpdateInfoDto;
 import com.yago.epidemic_management.model.pojo.Info;
 import com.yago.epidemic_management.service.InfoService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,18 +23,21 @@ public class InfoController {
     @Autowired
     InfoService infoService;
 
+    @ApiOperation("查询所有通知")
     @PostMapping("/queryInfo")
     public ResultResponse queryInfo(@RequestBody QueryInfoDto queryInfo) {
         PageInfo pageInfo = infoService.selectInfoList(queryInfo);
         return ResultResponse.success(pageInfo);
     }
 
+    @ApiOperation("根据用户名查询通知")
     @PostMapping("/queryInfoByName")
     public ResultResponse queryInfoByName(@RequestBody QueryInfoDto queryInfo) {
         PageInfo pageInfo = infoService.selectByName(queryInfo);
         return ResultResponse.success(pageInfo);
     }
 
+    @ApiOperation("更新通知")
     @PostMapping("/update")
     public ResultResponse updateInfo(@RequestBody UpdateInfoDto updateInfo) {
         System.out.println(updateInfo.toString());
@@ -43,12 +47,14 @@ public class InfoController {
         return ResultResponse.success();
     }
 
+    @ApiOperation("删除通知")
     @GetMapping("/delete/{id}")
     public ResultResponse deleteById(@PathVariable Integer id) {
         infoService.delete(id);
         return ResultResponse.success();
     }
 
+    @ApiOperation("新增通知")
     @PostMapping("/addInfo")
     public ResultResponse addInfo(@RequestBody QueryInfoDto queryInfoDto) {
         Info info = new Info();
