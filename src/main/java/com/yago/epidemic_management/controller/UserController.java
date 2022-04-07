@@ -39,18 +39,18 @@ public class UserController {
     /**
      * 普通用户注册
      *
-     * @param username
+     * @param mobile
      * @param password
      * @return
      */
     @ApiOperation("用户注册")
     @PostMapping("/register")
     @ResponseBody
-    public ResultResponse register(@RequestParam("username") String username,
+    public ResultResponse register(@RequestParam("mobile") String mobile,
                                    @RequestParam("password") String password) {
         //1.校验：判断用户名是否为空
-        if (StringUtils.isEmpty(username)) {
-            return ResultResponse.error(ExceptionEnum.NEED_USER_NAME);
+        if (StringUtils.isEmpty(mobile)) {
+            return ResultResponse.error(ExceptionEnum.NEED_MOBILE);
         }
         //2.校验：判断密码是否为空
         if (StringUtils.isEmpty(password)) {
@@ -59,7 +59,7 @@ public class UserController {
         if (password.length() < 8) {
             return ResultResponse.error(ExceptionEnum.PASSWORD_TOO_SHORT);
         }
-        userService.register(username, password);
+        userService.register(mobile, password);
         return ResultResponse.success();
     }
 
@@ -115,18 +115,18 @@ public class UserController {
     @PostMapping("/login")
     @ResponseBody
     public ResultResponse login(@RequestBody Map<String, String> user1, HttpSession session) {
-        String username = user1.get("username");
+        String mobile = user1.get("mobile");
         String password = user1.get("password");
         //1.校验：判断用户名是否为空
-        if (StringUtils.isEmpty(username)) {
-            return ResultResponse.error(ExceptionEnum.NEED_USER_NAME);
+        if (StringUtils.isEmpty(mobile)) {
+            return ResultResponse.error(ExceptionEnum.NEED_MOBILE);
         }
         //2.校验：判断密码是否为空
         if (StringUtils.isEmpty(password)) {
             return ResultResponse.error(ExceptionEnum.NEED_PASSWORD);
         }
         //3.查询用户
-        User user = userService.login(username, password);
+        User user = userService.login(mobile, password);
         //保存用户信息时，不保存密码
         user.setPassword(null);
         //将用户信息存在session中

@@ -149,11 +149,17 @@
         from epidemic_situation_user
         where username=#{username,jdbcType=VARCHAR}
     </select>
+    <select id="selectByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from epidemic_situation_user
+        where mobile=#{mobile,jdbcType=VARCHAR}
+    </select>
     <select id="selectLogin" parameterType="map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from epidemic_situation_user
-        where username = #{username,jdbcType=VARCHAR}
+        where mobile = #{mobile,jdbcType=VARCHAR}
         and password=#{password}
     </select>
     <select id="selectList" resultMap="BaseResultMap">

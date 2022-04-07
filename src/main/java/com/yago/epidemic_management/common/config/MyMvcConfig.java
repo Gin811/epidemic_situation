@@ -45,7 +45,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new UserLoginInterceptor())
-                .addPathPatterns("/admin/**")
+                .addPathPatterns("/admin/**")//拦截admin下的所有路径
                 .excludePathPatterns("/static/**")
                 .excludePathPatterns("/login")//开放登录路径
                 .excludePathPatterns("/adminLogin");//开放登录路径

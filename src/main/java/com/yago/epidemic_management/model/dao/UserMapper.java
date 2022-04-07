@@ -22,7 +22,9 @@ public interface UserMapper {
 
     User selectByName(@Param("username") String username);
 
-    User selectLogin(@Param("username") String username, @Param("password") String md5Password);
+    User selectByMobile(@Param("mobile") String mobile);
+
+    User selectLogin(@Param("mobile") String mobile, @Param("password") String md5Password);
 
     List<User> selectList();
 

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,20 +47,23 @@ public class UserServiceImpl implements UserService {
     /**
      * 用户注册
      *
-     * @param username
+     * @param mobile
      * @param password
      */
     @Override
-    public void register(String username, String password) {
+    public void register(String mobile, String password) {
 
         //重名不允许注册
-        User result = userMapper.selectByName(username);
+        User result = userMapper.selectByMobile(mobile);
         if (result != null) {
-            throw new MyException(ExceptionEnum.NAME_EXISTED);
+            throw new MyException(ExceptionEnum.MOBILE_EXIT);
         }
         //写到数据库
         User user = new User();
-        user.setUsername(username);
+        user.setMobile(mobile);
+        //每个用户注册时，默认为普通用户
+        user.setStatus(1);
+        user.setCreateTime(new Date());
         try {
             user.setPassword(MD5Utils.getMD5Str(password));
         } catch (NoSuchAlgorithmException e) {
@@ -75,22 +79,23 @@ public class UserServiceImpl implements UserService {
     /**
      * 用户登录
      *
-     * @param username
+     * @param mobile
      * @param password
      * @return
      */
     @Override
-    public User login(String username, String password) {
+    public User login(String mobile, String password) {
         String md5Password = password;
         try {
             md5Password = MD5Utils.getMD5Str(md5Password);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        User user = userMapper.selectLogin(username, md5Password);
+        User user = userMapper.selectLogin(mobile, md5Password);
         if (user == null) {
             throw new MyException(ExceptionEnum.WRONG_PASSWORD);
         }
+        //生成token
         String token = JWTUtils.createToken(user.getUserId().toString());
         user.setToken(token);
         return user;

@@ -14,9 +14,9 @@ public interface UserService {
 
     User selectByName(String username);
 
-    void register(String userName, String password);
+    void register(String mobile, String password);
 
-    User login(String username, String password);
+    User login(String mobile, String password);
 
     boolean checkAdminRole(User user);
 

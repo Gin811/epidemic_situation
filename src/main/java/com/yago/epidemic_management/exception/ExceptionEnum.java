@@ -24,6 +24,8 @@ public enum ExceptionEnum {
     NO_RECORD(10014, "没有这条记录"),
     NO_TOKEN(10015, "token已经过期"),
     BAD_TOKEN(10016, "token认证失败"),
+    NEED_MOBILE(10017, "需要手机号码"),
+    MOBILE_EXIT(10018, "该手机号码已被注册"),
 
     //系统异常  20000
     SYSTEM_ERROR(20000, "系统异常");
