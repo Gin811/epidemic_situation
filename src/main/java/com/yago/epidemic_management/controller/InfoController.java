@@ -23,6 +23,12 @@ public class InfoController {
     @Autowired
     InfoService infoService;
 
+    /**
+     * 查询所有通知信息
+     *
+     * @param queryInfo
+     * @return
+     */
     @ApiOperation("查询所有通知")
     @PostMapping("/queryInfo")
     public ResultResponse queryInfo(@RequestBody QueryInfoDto queryInfo) {
@@ -30,6 +36,12 @@ public class InfoController {
         return ResultResponse.success(pageInfo);
     }
 
+    /**
+     * 根据用户名查询通知
+     *
+     * @param queryInfo
+     * @return
+     */
     @ApiOperation("根据用户名查询通知")
     @PostMapping("/queryInfoByName")
     public ResultResponse queryInfoByName(@RequestBody QueryInfoDto queryInfo) {
@@ -37,6 +49,12 @@ public class InfoController {
         return ResultResponse.success(pageInfo);
     }
 
+    /**
+     * 更新所有通知
+     *
+     * @param updateInfo
+     * @return
+     */
     @ApiOperation("更新通知")
     @PostMapping("/update")
     public ResultResponse updateInfo(@RequestBody UpdateInfoDto updateInfo) {
@@ -47,6 +65,12 @@ public class InfoController {
         return ResultResponse.success();
     }
 
+    /**
+     * 根据ID删除通知
+     *
+     * @param id
+     * @return
+     */
     @ApiOperation("删除通知")
     @GetMapping("/delete/{id}")
     public ResultResponse deleteById(@PathVariable Integer id) {
@@ -54,6 +78,12 @@ public class InfoController {
         return ResultResponse.success();
     }
 
+    /**
+     * 新增通知
+     *
+     * @param queryInfoDto
+     * @return
+     */
     @ApiOperation("新增通知")
     @PostMapping("/addInfo")
     public ResultResponse addInfo(@RequestBody QueryInfoDto queryInfoDto) {
