@@ -2,8 +2,8 @@ package com.yago.epidemic_management.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.yago.epidemic_management.common.ResultResponse;
-import com.yago.epidemic_management.model.dto.AddHodoMeter;
-import com.yago.epidemic_management.model.dto.UpdateHodoMeter;
+import com.yago.epidemic_management.model.dto.add.AddHodoMeter;
+import com.yago.epidemic_management.model.dto.update.UpdateHodoMeter;
 import com.yago.epidemic_management.model.pojo.HodoMeter;
 import com.yago.epidemic_management.service.HodoMeterService;
 import io.swagger.annotations.ApiOperation;
@@ -19,13 +19,12 @@ import org.springframework.web.bind.annotation.*;
  **/
 @CrossOrigin
 @RestController
-@RequestMapping("admin/hodometer")
 public class HodoMeterController {
     @Autowired
     HodoMeterService hodoMeterService;
 
     @ApiOperation("所有外出信息列表")
-    @GetMapping("/getHodoMeterList")
+    @GetMapping("/admin/odometer/getOdoMeterList")
     public ResultResponse getHodoMeterList(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, String username) {
 
         if (username.isEmpty()) {
@@ -39,14 +38,14 @@ public class HodoMeterController {
     }
 
     @ApiOperation("单人外出信息详情")
-    @GetMapping("/getHodoMeter")
+    @GetMapping("/odometer/getOdoMeter")
     public ResultResponse getHodoMeter(@RequestParam Integer id) {
         HodoMeter hodeMeter = hodoMeterService.getHodeMeter(id);
         return ResultResponse.success(hodeMeter);
     }
 
     @ApiOperation("添加个人外出信息")
-    @PostMapping("/add")
+    @PostMapping("/odometer/add")
     public ResultResponse addHodoMeterUser(@Validated @RequestBody AddHodoMeter addHodoMeter) {
         HodoMeter hodoMeter = new HodoMeter();
         BeanUtils.copyProperties(addHodoMeter, hodoMeter);
@@ -55,7 +54,7 @@ public class HodoMeterController {
     }
 
     @ApiOperation("更新个人外出信息")
-    @PostMapping("/update")
+    @PostMapping("/odometer/update")
     public ResultResponse updateHodoMeterUser(@Validated @RequestBody UpdateHodoMeter updateHodoMeter) {
         HodoMeter hodoMeter = new HodoMeter();
         BeanUtils.copyProperties(updateHodoMeter, hodoMeter);
@@ -64,14 +63,14 @@ public class HodoMeterController {
     }
 
     @ApiOperation("删除个人外出信息")
-    @GetMapping("delete/{id}")
+    @GetMapping("/admin/odometer/delete/{id}")
     public ResultResponse deteleUser(@PathVariable Integer id) {
         hodoMeterService.deleteUser(id);
         return ResultResponse.success();
     }
 
     @ApiOperation("批量删除个人外出信息")
-    @GetMapping("deleteUsers")
+    @GetMapping("/admin/odometer/deleteUsers")
     public ResultResponse batchDeleteHodoMeterUser(@RequestParam("ids") Integer[] ids) {
         hodoMeterService.deleteUsers(ids);
         return ResultResponse.success();

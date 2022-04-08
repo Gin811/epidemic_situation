@@ -1,4 +1,4 @@
-package com.yago.epidemic_management.model.dto;
+package com.yago.epidemic_management.model.dto.update;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -16,7 +16,7 @@ import java.util.Date;
  * Description:Dto是用于接受前端数据得类，用于服务层
  **/
 @Data
-public class UpdateUserDto implements Serializable {
+public class AdminUpdateUserDto implements Serializable {
     @NotNull(message = "userId不能为空")
     private Integer userId;
 
@@ -31,7 +31,6 @@ public class UpdateUserDto implements Serializable {
     @Size(min = 11, max = 11)
     private String mobile;
 
-    @NotNull(message = "状态不能为空")
     private Integer status;
 
     @NotNull(message = "创建者id不能为空")

@@ -1,4 +1,4 @@
-package com.yago.epidemic_management.common.config;
+package com.yago.epidemic_management.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

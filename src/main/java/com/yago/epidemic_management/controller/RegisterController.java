@@ -2,8 +2,8 @@ package com.yago.epidemic_management.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.yago.epidemic_management.common.ResultResponse;
-import com.yago.epidemic_management.model.dto.AddRegisterDto;
-import com.yago.epidemic_management.model.dto.UpdateRegisterDto;
+import com.yago.epidemic_management.model.dto.add.AddRegisterDto;
+import com.yago.epidemic_management.model.dto.update.UpdateRegisterDto;
 import com.yago.epidemic_management.model.pojo.Register;
 import com.yago.epidemic_management.service.RegisterService;
 import io.swagger.annotations.ApiOperation;
@@ -19,14 +19,13 @@ import org.springframework.web.bind.annotation.*;
  **/
 @CrossOrigin
 @RestController
-@RequestMapping("/admin/register")
 public class RegisterController {
 
     @Autowired
     RegisterService registerService;
 
     @ApiOperation("健康登记人员列表")
-    @GetMapping("/registerList")
+    @GetMapping("/admin/register/registerList")
     public ResultResponse getRegisterList(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, String username) {
 
         if (username.isEmpty()) {
@@ -39,14 +38,14 @@ public class RegisterController {
     }
 
     @ApiOperation("个人健康登记详情")
-    @GetMapping("/registerUser")
+    @GetMapping("/register/registerUser")
     public ResultResponse registerUser(@RequestParam("id") Integer id) {
         Register register = registerService.selectRegisterUser(id);
         return ResultResponse.success(register);
     }
 
     @ApiOperation("更新个人健康信息")
-    @PostMapping("/update")
+    @PostMapping("/register/update")
     public ResultResponse updateRegisterUser(@Validated @RequestBody UpdateRegisterDto registerDto) {
         Register registerUser = new Register();
         BeanUtils.copyProperties(registerDto, registerUser);
@@ -55,7 +54,7 @@ public class RegisterController {
     }
 
     @ApiOperation("新增个人健康信息")
-    @PostMapping("/add")
+    @PostMapping("/register/add")
     public ResultResponse addRegisterUser(@Validated @RequestBody AddRegisterDto registerDto) {
         Register register = new Register();
         BeanUtils.copyProperties(registerDto, register);
@@ -64,14 +63,14 @@ public class RegisterController {
     }
 
     @ApiOperation("删除个人健康信息")
-    @PostMapping("delete/{id}")
+    @PostMapping("/admin/register/delete/{id}")
     public ResultResponse deleteRegisterUser(@PathVariable("id") Integer id) {
         registerService.deleteRegisterUser(id);
         return ResultResponse.success();
     }
 
     @ApiOperation("批量删除个人健康信息")
-    @PostMapping("batchDelete")
+    @PostMapping("/admin/register/batchDelete")
     public ResultResponse batchDeleteRegisterUser(@RequestParam("ids") Integer[] ids) {
         registerService.batchDeleteRegisterUser(ids);
         return ResultResponse.success();

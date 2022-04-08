@@ -1,4 +1,4 @@
-package com.yago.epidemic_management.model.dto;
+package com.yago.epidemic_management.model.dto.update;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

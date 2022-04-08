@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.yago.epidemic_management.exception.ExceptionEnum;
 import com.yago.epidemic_management.exception.MyException;
 import com.yago.epidemic_management.model.dao.UserMapper;
-import com.yago.epidemic_management.model.dto.AddUserDto;
+import com.yago.epidemic_management.model.dto.add.AddUserDto;
 import com.yago.epidemic_management.model.pojo.User;
 import com.yago.epidemic_management.service.UserService;
 import com.yago.epidemic_management.utils.JWTUtils;
@@ -113,6 +113,12 @@ public class UserServiceImpl implements UserService {
         if (user.getStatus() == null) {
             return false;
         }
+        return user.getStatus() == 2;
+    }
+
+    @Override
+    public boolean checkAdminRoleById(Integer userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
         return user.getStatus() == 2;
     }
 

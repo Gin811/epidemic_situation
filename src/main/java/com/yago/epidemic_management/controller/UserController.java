@@ -3,14 +3,17 @@ package com.yago.epidemic_management.controller;
 import com.yago.epidemic_management.common.Constant;
 import com.yago.epidemic_management.common.ResultResponse;
 import com.yago.epidemic_management.exception.ExceptionEnum;
-import com.yago.epidemic_management.model.dto.UserDto;
+import com.yago.epidemic_management.model.dto.update.UpdateUserDto;
+import com.yago.epidemic_management.model.dto.update.UserDto;
 import com.yago.epidemic_management.model.pojo.User;
 import com.yago.epidemic_management.service.UserService;
 import com.yago.epidemic_management.utils.JWTUtils;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,37 +70,42 @@ public class UserController {
      * 管理员登录
      *
      * @param userDto
-     * @param session
+     * @param request
+     * @param response
      * @return
      */
     @ApiOperation("管理员登录")
     @PostMapping("/adminLogin")
     @ResponseBody
-    public ResultResponse adminLogin(@RequestBody UserDto userDto, HttpSession session, HttpServletResponse response) {
-        String username = userDto.getUsername();
+    public ResultResponse adminLogin(@RequestBody UserDto userDto, HttpServletRequest request, HttpServletResponse response) {
+        String mobile = userDto.getMobile();
         String password = userDto.getPassword();
-        System.out.println(username);
-        System.out.println(password);
         //1.校验：判断用户名是否为空
-        if (StringUtils.isEmpty(username)) {
+        if (StringUtils.isEmpty(mobile)) {
             return ResultResponse.error(ExceptionEnum.NEED_USER_NAME);
         }
         //2.校验：判断密码是否为空
         if (StringUtils.isEmpty(password)) {
             return ResultResponse.error(ExceptionEnum.NEED_PASSWORD);
         }
-        User user = userService.login(username, password);
-        //3.判断是否是管理员
+        User user = userService.login(mobile, password);
+        //3.判断是否是管理员;是管理员，可以执行操作;
         if (userService.checkAdminRole(user)) {
-            //是管理员，可以执行操作
             //保存用户信息时，不保存密码
             user.setPassword(null);
-            //将用户信息存在session中
-//            response.setHeader("Authorization", Constant.MPIDEMICMANAGEMENT_USER);
-//            response.setHeader("Access-control-Expose-Headers", "Authorization");
+
+            /*  返回给浏览器的响应头
+             *  response.setHeader("Authorization", Constant.MPIDEMICMANAGEMENT_USER);
+             *  response.setHeader("Access-control-Expose-Headers", "Authorization");
+             */
             response.setHeader(JWTUtils.USER_LOGIN_TOKEN, user.getToken());
             response.setHeader("Access-control-Expose-Headers", "USER_LOGIN_TOKEN");
-//            session.setAttribute(Constant.MPIDEMICMANAGEMENT_USER, user);
+
+//            //将用户信息存在session中
+//            request.getSession().setAttribute(Constant.MPIDEMICMANAGEMENT_USER, user.getUsername());
+//            Object attribute = request.getSession().getAttribute(Constant.MPIDEMICMANAGEMENT_USER);
+//            System.out.println("登录时的session为："+attribute.toString());
+
             return ResultResponse.success(user);
         } else {
             return ResultResponse.error(ExceptionEnum.NEED_ADMIN);
@@ -108,13 +116,14 @@ public class UserController {
      * 普通用户注册
      *
      * @param user1
-     * @param session
+     * @param request
+     * @param response
      * @return
      */
     @ApiOperation("用户登录")
     @PostMapping("/login")
     @ResponseBody
-    public ResultResponse login(@RequestBody Map<String, String> user1, HttpSession session) {
+    public ResultResponse login(@RequestBody Map<String, String> user1, HttpServletRequest request, HttpServletResponse response) {
         String mobile = user1.get("mobile");
         String password = user1.get("password");
         //1.校验：判断用户名是否为空
@@ -129,9 +138,6 @@ public class UserController {
         User user = userService.login(mobile, password);
         //保存用户信息时，不保存密码
         user.setPassword(null);
-        //将用户信息存在session中
-        session.setAttribute(Constant.MPIDEMICMANAGEMENT_USER, user);
-
         return ResultResponse.success(user);
     }
 
@@ -144,16 +150,28 @@ public class UserController {
     @ApiOperation("用户注销")
     @PostMapping("/logout")
     @ResponseBody
-    public ResultResponse logout(HttpServletRequest request) {
+    public ResultResponse logout(HttpSession session) {
 //        if (session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER) == null) {
 //            return ResultResponse.error(ExceptionEnum.NO_USER);
 //        }
-
-        HttpSession session = request.getSession();
-
         System.out.println("session为：" + session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER));
         session.removeAttribute(Constant.MPIDEMICMANAGEMENT_USER);
         System.out.println("session为：" + session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER));
+        return ResultResponse.success();
+    }
+
+    /**
+     * 用户更新信息
+     *
+     * @param userDto
+     * @return
+     */
+    @ApiOperation("用户更新信息")
+    @PostMapping("user/update")
+    public ResultResponse updateUser(@Validated @RequestBody UpdateUserDto userDto) {
+        User user = new User();
+        BeanUtils.copyProperties(userDto, user);
+        userService.update(user);
         return ResultResponse.success();
     }
 }

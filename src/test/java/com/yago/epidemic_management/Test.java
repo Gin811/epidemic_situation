@@ -8,7 +8,7 @@ package com.yago.epidemic_management;
 public class Test {
     public static void main(String[] args) {
         int a = 2;
-        Object o = (Object) a;
+        Object o = a;
         if (o instanceof Byte) {
             System.out.println("ttttt");
         } else {

@@ -45,14 +45,17 @@ public class JWTUtils {
      * @return
      */
     public static String createToken(String sub) {
-        return tokenPrefix + JWT.create()
-                .withSubject(sub)
-                .withExpiresAt(new Date(System.currentTimeMillis() + expireTime))
-                .sign(Algorithm.HMAC512(secret));
+        String token = "";
+        Date date = new Date(System.currentTimeMillis() + expireTime);
+        token = tokenPrefix + JWT.create()
+                .withSubject(sub)       //保存用户id
+                .withExpiresAt(date)        //token有效期
+                .sign(Algorithm.HMAC512(secret));       //加密秘钥
+        return token;   //返回token
     }
 
     /**
-     * 验证token
+     * 验证token：返回的是存在token里的用户信息
      *
      * @param token
      */
@@ -89,7 +92,7 @@ public class JWTUtils {
             throw new MyException(ExceptionEnum.BAD_TOKEN);
 
         }
-        //如果剩余过期时间少于过期时常的一般时 需要更新
+        //如果剩余过期时间少于过期时常的一半时 需要更新
         return (expiresAt.getTime() - System.currentTimeMillis()) < (expireTime >> 1);
     }
 

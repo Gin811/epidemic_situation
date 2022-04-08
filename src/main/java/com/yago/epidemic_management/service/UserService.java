@@ -1,7 +1,7 @@
 package com.yago.epidemic_management.service;
 
 import com.github.pagehelper.PageInfo;
-import com.yago.epidemic_management.model.dto.AddUserDto;
+import com.yago.epidemic_management.model.dto.add.AddUserDto;
 import com.yago.epidemic_management.model.pojo.User;
 
 /**
@@ -19,6 +19,8 @@ public interface UserService {
     User login(String mobile, String password);
 
     boolean checkAdminRole(User user);
+
+    boolean checkAdminRoleById(Integer userId);
 
     PageInfo userListForAdmin(Integer pageNum, Integer pageSize);
 

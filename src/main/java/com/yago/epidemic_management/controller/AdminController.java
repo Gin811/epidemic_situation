@@ -2,8 +2,8 @@ package com.yago.epidemic_management.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.yago.epidemic_management.common.ResultResponse;
-import com.yago.epidemic_management.model.dto.AddUserDto;
-import com.yago.epidemic_management.model.dto.UpdateUserDto;
+import com.yago.epidemic_management.model.dto.add.AddUserDto;
+import com.yago.epidemic_management.model.dto.update.AdminUpdateUserDto;
 import com.yago.epidemic_management.model.pojo.User;
 import com.yago.epidemic_management.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
  **/
 @CrossOrigin
 @RestController
-@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
@@ -34,8 +33,9 @@ public class AdminController {
      */
     @ApiOperation("管理员列表")
     @CrossOrigin
-    @GetMapping("/adminList")
+    @GetMapping("/admin/adminList")
     public ResultResponse adminListForAdmin(@RequestParam Integer pageNum, @RequestParam Integer pageSize, String username) {
+
         if (username.isEmpty()) {
             //如果username为空，则查询管理员列表
             PageInfo pageInfo = userService.adminListForAdmin(pageNum, pageSize);
@@ -56,7 +56,7 @@ public class AdminController {
      */
     @ApiOperation("用户列表")
     @CrossOrigin
-    @GetMapping("/user/userList")
+    @GetMapping("/admin/user/userList")
     public ResultResponse userListForAdmin(@RequestParam Integer pageNum, @RequestParam Integer pageSize, String username) {
         if (username.isEmpty()) {
             PageInfo pageInfo = userService.userListForAdmin(pageNum, pageSize);
@@ -87,9 +87,10 @@ public class AdminController {
      * @return
      */
     @ApiOperation("管理员更新用户")
-    @PostMapping("/user/update")
-    public ResultResponse updateUser(@Validated @RequestBody UpdateUserDto userDto) {
+    @PostMapping("admin/user/update")
+    public ResultResponse updateUser(@Validated @RequestBody AdminUpdateUserDto userDto) {
         User user = new User();
+
         BeanUtils.copyProperties(userDto, user);
         userService.update(user);
         return ResultResponse.success();
@@ -102,7 +103,7 @@ public class AdminController {
      * @return http://127.0.0.1:8081/user/delete?userId=1   【传统风格】
      * http://127.0.0.1:8081/user/delete/1    【Restful风格】
      */
-    @PostMapping("/user/delete/{userId}")
+    @PostMapping("/admin/user/delete/{userId}")
     public ResultResponse deleteUser(@PathVariable Integer userId) {
         System.out.println(userId);
         userService.deleteUser(userId);
@@ -129,7 +130,7 @@ public class AdminController {
      * @return
      */
     @ApiOperation("批量设置用户禁用")
-    @PostMapping("/batchDeleteEgressUser")
+    @PostMapping("/admin/batchDeleteEgressUser")
     public ResultResponse batchDeleteEgressUser(@RequestParam Integer[] ids, @RequestParam Integer status) {
         userService.batchDeleteEgressUser(ids, status);
         return ResultResponse.success();

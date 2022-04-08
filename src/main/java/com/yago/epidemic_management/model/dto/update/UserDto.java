@@ -1,4 +1,4 @@
-package com.yago.epidemic_management.model.dto;
+package com.yago.epidemic_management.model.dto.update;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -9,20 +9,20 @@ import java.io.Serializable;
  * Description:
  **/
 public class UserDto implements Serializable {
-    @NotBlank(message = "用户名不能为空")
-    private String username;
+    @NotBlank(message = "号码不能为空")
+    private String mobile;
 
     @NotBlank(message = "密码不能为空")
     private String password;
 
     private String token;
 
-    public String getUsername() {
-        return username;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getPassword() {
