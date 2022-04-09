@@ -39,6 +39,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
         /*
          * addResourceHandler:访问映射路径
          * addResourceLocations：资源绝对路径
+         * file: 当前项目的根目录
          */
 
         //配置swagger的映射路径【http://localhost:8081/swagger-ui.html】
@@ -51,6 +52,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/")
                 .addResourceLocations("classpath:/templates/")
+                .addResourceLocations("file:" + "/uploadFile/")
                 .addResourceLocations("classpath:/META-INF/resources/");
     }
 
@@ -70,6 +72,8 @@ public class MyMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/adminLogin")     //开放登录路径
                 .excludePathPatterns("/admin/**")   //开放角色路径，避免重复校验
                 .excludePathPatterns("/register")
+                .excludePathPatterns("/icon/**")
+                .excludePathPatterns("/uploadFile/**")
                 .excludePathPatterns(swaggerExcludes);   //开放注册路径
 
         registry.addInterceptor(getRoleInterceptor())

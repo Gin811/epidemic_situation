@@ -8,6 +8,14 @@ spring:
     url: jdbc:mysql://localhost:3306/epidemic_situation?useSSL=true&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: root
+  servlet:
+    #文件大小 MB必须大写
+    multipart:
+      #单个文件大小
+      max-file-size: 10MB
+      #设置总上传的数据大小
+      max-request-size: 10MB
+  #日期格式
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
 
@@ -18,3 +26,9 @@ jwt:
   tokenPrefix: "Bearer " #token前缀
   secret: "qwertyuiop7418520" #秘钥：secret用来进行jwt的签发和jwt的验证
   expireTime: 60 #token有效时间（分钟）建议一小时上
+
+file:
+  uploadPath: /uploadFile
+#取值：
+#1.@ConfigurationProperties(prefix = "file")
+#2.@Value("${file.uploadPath}")
