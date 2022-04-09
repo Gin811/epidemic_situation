@@ -28,7 +28,7 @@ public class RoleInterceptor implements HandlerInterceptor {
 
         //1.http的header中获得token
         String token = request.getHeader("token");
-//        System.out.println("登录拦截器：" + token);
+//        System.out.println("Role拦截器：" + token);
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }

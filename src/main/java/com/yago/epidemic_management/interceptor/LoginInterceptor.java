@@ -20,6 +20,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //1.http的header中获得token
         String token = request.getHeader("token");
+//        System.out.println("Login登录拦截器：" + token);
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }

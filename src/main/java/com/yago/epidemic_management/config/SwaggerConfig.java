@@ -17,7 +17,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 public class SwaggerConfig {
 
-    //访问http://localhost:8083/swagger-ui.html可以看到API文档
+    //访问http://localhost:8081/swagger-ui.html可以看到API文档
     @Bean
     public Docket api() {
         //固定格式

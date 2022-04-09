@@ -10,7 +10,7 @@ public class HodoMeter {
     private String username;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date cx_time;
+    private Date cxTime;
 
     private String place;
 
@@ -34,12 +34,12 @@ public class HodoMeter {
         this.username = username == null ? null : username.trim();
     }
 
-    public Date getCx_time() {
-        return cx_time;
+    public Date getCxTime() {
+        return cxTime;
     }
 
-    public void setCx_time(Date cx_time) {
-        this.cx_time = cx_time;
+    public void setCxTime(Date cxTime) {
+        this.cxTime = cxTime;
     }
 
     public String getPlace() {

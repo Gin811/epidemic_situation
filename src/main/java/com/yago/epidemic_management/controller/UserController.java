@@ -168,6 +168,7 @@ public class UserController {
      */
     @ApiOperation("用户更新信息")
     @PostMapping("user/update")
+    @ResponseBody
     public ResultResponse updateUser(@Validated @RequestBody UpdateUserDto userDto) {
         User user = new User();
         BeanUtils.copyProperties(userDto, user);

@@ -189,6 +189,13 @@ public class UserServiceImpl implements UserService {
         if (oldUser != null && !oldUser.getUserId().equals(updateUser.getUserId())) {
             throw new MyException(ExceptionEnum.NAME_EXISTED);
         }
+        if (!(updateUser.getPassword() == null)) {
+            try {
+                updateUser.setPassword(MD5Utils.getMD5Str(updateUser.getPassword()));
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+        }
         int count = userMapper.updateByPrimaryKeySelective(updateUser);
         if (count == 0) {
             throw new MyException(ExceptionEnum.UPDATE_FAILED);

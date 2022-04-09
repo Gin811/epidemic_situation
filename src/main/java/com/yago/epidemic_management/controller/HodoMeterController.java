@@ -32,7 +32,7 @@ public class HodoMeterController {
             return ResultResponse.success(hodeMeterList);
         } else {
             HodoMeter hodoMeter = hodoMeterService.selectByName(username);
-            System.out.println(hodoMeter.getCx_time());
+            System.out.println(hodoMeter.getCxTime());
             return ResultResponse.success(hodoMeter);
         }
     }

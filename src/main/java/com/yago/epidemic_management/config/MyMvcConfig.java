@@ -41,16 +41,16 @@ public class MyMvcConfig implements WebMvcConfigurer {
          * addResourceLocations：资源绝对路径
          */
 
-        //配置swagger的映射路径
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations(
-                        "classpath:/META-INF/resources/webjars/");
+        //配置swagger的映射路径【http://localhost:8081/swagger-ui.html】
+//        registry.addResourceHandler("swagger-ui.html")
+//                .addResourceLocations("classpath:/META-INF/resources/");
+//
+//        registry.addResourceHandler("/webjars/**")
+//                .addResourceLocations("classpath:/META-INF/resources/webjars/");
 
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/")
+                .addResourceLocations("classpath:/templates/")
                 .addResourceLocations("classpath:/META-INF/resources/");
     }
 
@@ -61,19 +61,21 @@ public class MyMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        //定义排除swagger访问的路径配置
+        String[] swaggerExcludes = new String[]{"/error", "/static/**", "/doc.html", "/favicon.ico", "/swagger-ui.html", "/swagger-resources/**"};
+
         registry.addInterceptor(getLoginInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/static/**")  //开放静态资源
                 .excludePathPatterns("/login")  //开放登录路径
-                .excludePathPatterns("/adminLogin")   //开放登录路径
-                .excludePathPatterns("/register");    //开放注册路径
+                .excludePathPatterns("/adminLogin")     //开放登录路径
+                .excludePathPatterns("/admin/**")   //开放角色路径，避免重复校验
+                .excludePathPatterns("/register")
+                .excludePathPatterns(swaggerExcludes);   //开放注册路径
 
         registry.addInterceptor(getRoleInterceptor())
                 .addPathPatterns("/admin/**")   //拦截admin下的所有路径
-                .excludePathPatterns("/static/**")  //开放静态资源
-                .excludePathPatterns("/login")  //开放登录路径
-                .excludePathPatterns("/adminLogin")   //开放登录路径
-                .excludePathPatterns("/register");    //开放注册路径
+                .excludePathPatterns("/static/**");  //开放静态资源
+
     }
 }
 //registry.addInterceptor(new UserLoginInterceptor())
