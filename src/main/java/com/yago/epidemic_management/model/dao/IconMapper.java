@@ -16,4 +16,6 @@ public interface IconMapper {
     int updateByPrimaryKeySelective(Icon record);
 
     int updateByPrimaryKey(Icon record);
+
+    Icon selectByUserId(Integer userId);
 }

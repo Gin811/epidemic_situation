@@ -28,6 +28,14 @@ public class IconServiceIpml implements IconService {
         if (count == 0) {
             throw new MyException(ExceptionEnum.INSERT_FAILED);
         }
+    }
 
+    @Override
+    public Icon queryIcon(Integer userId) {
+        Icon icon = iconMapper.selectByUserId(userId);
+        if (icon == null) {
+            throw new MyException(ExceptionEnum.NO_RECORD);
+        }
+        return icon;
     }
 }

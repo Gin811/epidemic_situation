@@ -52,7 +52,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/")
                 .addResourceLocations("classpath:/templates/")
-                .addResourceLocations("file:" + "/uploadFile/")
+                .addResourceLocations("file:" + "/uploadFile/icons/")
                 .addResourceLocations("classpath:/META-INF/resources/");
     }
 

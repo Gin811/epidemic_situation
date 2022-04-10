@@ -1,95 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yago.epidemic_management.model.dao.IconMapper">
-  <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.Icon">
-    <id column="icon_id" jdbcType="INTEGER" property="iconId"/>
-    <result column="user_id" jdbcType="INTEGER" property="userId"/>
-    <result column="icon_url" jdbcType="VARCHAR" property="iconUrl"/>
-    <result column="is_activity" jdbcType="INTEGER" property="isActivity"/>
-    <result column="last_update" jdbcType="TIMESTAMP" property="lastUpdate"/>
-  </resultMap>
-  <sql id="Base_Column_List">
-    icon_id
-    , user_id, icon_url, is_activity, last_update
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from epidemic_situation_icon
-    where icon_id = #{iconId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete
-    from epidemic_situation_icon
-    where icon_id = #{iconId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.Icon">
-    insert into epidemic_situation_icon (icon_id, user_id, icon_url,
-                                         is_activity, last_update)
-    values (#{iconId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{iconUrl,jdbcType=VARCHAR},
-            #{isActivity,jdbcType=INTEGER}, #{lastUpdate,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.Icon">
-    insert into epidemic_situation_icon
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="iconId != null">
-        icon_id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="iconUrl != null">
-        icon_url,
-      </if>
-      <if test="isActivity != null">
-        is_activity,
-      </if>
-      <if test="lastUpdate != null">
-        last_update,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="iconId != null">
-        #{iconId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="iconUrl != null">
-        #{iconUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="isActivity != null">
-        #{isActivity,jdbcType=INTEGER},
-      </if>
-      <if test="lastUpdate != null">
-        #{lastUpdate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yago.epidemic_management.model.pojo.Icon">
-    update epidemic_situation_icon
-    <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="iconUrl != null">
-        icon_url = #{iconUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="isActivity != null">
-        is_activity = #{isActivity,jdbcType=INTEGER},
-      </if>
-      <if test="lastUpdate != null">
-        last_update = #{lastUpdate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where icon_id = #{iconId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.yago.epidemic_management.model.pojo.Icon">
-    update epidemic_situation_icon
-    set user_id     = #{userId,jdbcType=INTEGER},
-        icon_url    = #{iconUrl,jdbcType=VARCHAR},
-        is_activity = #{isActivity,jdbcType=INTEGER},
-        last_update = #{lastUpdate,jdbcType=TIMESTAMP}
-    where icon_id = #{iconId,jdbcType=INTEGER}
-  </update>
+    <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.Icon">
+        <id column="icon_id" jdbcType="INTEGER" property="iconId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="icon_url" jdbcType="VARCHAR" property="iconUrl"/>
+        <result column="is_activity" jdbcType="INTEGER" property="isActivity"/>
+        <result column="last_update" jdbcType="TIMESTAMP" property="lastUpdate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        icon_id
+        , user_id, icon_url, is_activity, last_update
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from epidemic_situation_icon
+        where icon_id = #{iconId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from epidemic_situation_icon
+        where icon_id = #{iconId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.Icon">
+        insert into epidemic_situation_icon (icon_id, user_id, icon_url,
+                                             is_activity, last_update)
+        values (#{iconId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{iconUrl,jdbcType=VARCHAR},
+                #{isActivity,jdbcType=INTEGER}, #{lastUpdate,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.Icon">
+        insert into epidemic_situation_icon
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="iconId != null">
+                icon_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="iconUrl != null">
+                icon_url,
+            </if>
+            <if test="isActivity != null">
+                is_activity,
+            </if>
+            <if test="lastUpdate != null">
+                last_update,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="iconId != null">
+                #{iconId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="iconUrl != null">
+                #{iconUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="isActivity != null">
+                #{isActivity,jdbcType=INTEGER},
+            </if>
+            <if test="lastUpdate != null">
+                #{lastUpdate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yago.epidemic_management.model.pojo.Icon">
+        update epidemic_situation_icon
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="iconUrl != null">
+                icon_url = #{iconUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="isActivity != null">
+                is_activity = #{isActivity,jdbcType=INTEGER},
+            </if>
+            <if test="lastUpdate != null">
+                last_update = #{lastUpdate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where icon_id = #{iconId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yago.epidemic_management.model.pojo.Icon">
+        update epidemic_situation_icon
+        set user_id     = #{userId,jdbcType=INTEGER},
+            icon_url    = #{iconUrl,jdbcType=VARCHAR},
+            is_activity = #{isActivity,jdbcType=INTEGER},
+            last_update = #{lastUpdate,jdbcType=TIMESTAMP}
+        where icon_id = #{iconId,jdbcType=INTEGER}
+    </update>
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from epidemic_situation_icon
+        where user_id=#{userId,jdbcType=INTEGER} and is_activity=1
+    </select>
 </mapper>

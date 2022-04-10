@@ -1,6 +1,7 @@
 package com.yago.epidemic_management.controller;
 
 import com.yago.epidemic_management.model.dto.add.AddIconDto;
+import com.yago.epidemic_management.model.pojo.Icon;
 import com.yago.epidemic_management.service.IconService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +72,7 @@ public class IconController {
         //String format = simpleDateFormat.format(new Date());
         String format = "icons";
 
-        // 生成以日期分割的文件路径
+        // 生成文件路径
         File readPath = new File(UPLOAD_PATH_PREFIX + uploadPath + File.separator + format);
         System.out.println("存放的文件夹: " + readPath);
         System.out.println("存放文件的绝对路径: " + readPath.getAbsolutePath());
@@ -88,7 +89,7 @@ public class IconController {
 
             // 获取存储路径:http://localhost:8081/uploadFile/icons/df828716-fbd8-42df-94d3-41b7292afeca.jpg
 //            String filePath = getUploadPath(request, format + "/" + newFileName);
-            String filePath = uploadPath + "/" + newFileName;
+            String filePath = uploadPath + "/" + format + "/" + newFileName;
             map.put("path", filePath);
         } catch (IOException e) {
             e.printStackTrace();
@@ -108,6 +109,16 @@ public class IconController {
         map.put("msg", "添加成功");
         map.put("data", null);
 
+        return map;
+    }
+
+    @GetMapping("/queryIcon")
+    public Map<String, Object> queryIcon(@RequestParam Integer userId) {
+        Icon icon = iconService.queryIcon(userId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("status", 10000);
+        map.put("msg", "请求成功");
+        map.put("data", icon);
         return map;
     }
 

@@ -1,6 +1,7 @@
 package com.yago.epidemic_management.service;
 
 import com.yago.epidemic_management.model.dto.add.AddIconDto;
+import com.yago.epidemic_management.model.pojo.Icon;
 
 /**
  * @Author: YaGo
@@ -9,4 +10,6 @@ import com.yago.epidemic_management.model.dto.add.AddIconDto;
  **/
 public interface IconService {
     void addIcon(AddIconDto addIconDto);
+
+    Icon queryIcon(Integer userId);
 }
