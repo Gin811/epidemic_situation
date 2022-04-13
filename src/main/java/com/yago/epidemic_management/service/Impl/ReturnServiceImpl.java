@@ -35,6 +35,15 @@ public class ReturnServiceImpl implements ReturnService {
     }
 
     @Override
+    public PageInfo getReviewedReturnList(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<ReturnUserVo> returns = returnMapper.selectReviewedAll();
+        PageInfo<ReturnUserVo> pageInfo = new PageInfo<>(returns);
+        return pageInfo;
+    }
+
+
+    @Override
     public ReturnUserVo getReturnUserByName(String userName) {
         ReturnUserVo aReturn = returnMapper.selectByUserName(userName);
         if (aReturn == null) {

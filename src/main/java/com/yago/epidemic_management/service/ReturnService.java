@@ -13,6 +13,8 @@ import com.yago.epidemic_management.model.vo.ReturnUserVo;
 public interface ReturnService {
     PageInfo getReturnList(Integer pageNum, Integer pageSize);
 
+    PageInfo getReviewedReturnList(Integer pageNum, Integer pageSize);
+
     ReturnUserVo getReturnUserByName(String userName);
 
     void addReturn(AddReturn addReturn);

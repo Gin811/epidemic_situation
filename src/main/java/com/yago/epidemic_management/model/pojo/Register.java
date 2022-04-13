@@ -7,6 +7,16 @@ import java.util.Date;
 public class Register {
     private Integer id;
 
+    private Integer userId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     private String name;
 
     private String phone;

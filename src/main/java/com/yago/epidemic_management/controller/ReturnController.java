@@ -32,6 +32,13 @@ public class ReturnController {
         return ResultResponse.success(returnList);
     }
 
+    @ApiOperation("已审核的申请返回列表")
+    @RequestMapping("/admin/return/queryReviewed")
+    public ResultResponse getReviewedReturnList(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+        PageInfo returnList = returnService.getReviewedReturnList(pageNum, pageSize);
+        return ResultResponse.success(returnList);
+    }
+
     @ApiOperation("按名查询申请返回")
     @RequestMapping("/return/queryByName")
     public ResultResponse queryByName(@RequestParam String userName) {
@@ -69,7 +76,7 @@ public class ReturnController {
 
     @ApiOperation("批量删除返回申请")
     @RequestMapping("/admin/return/batchDelete")
-    public ResultResponse batchDeleteByUserId(@RequestParam("userIds") Integer[] userIds) {
+    public ResultResponse batchDeleteByUserId(@RequestBody Integer[] userIds) {
         returnService.batchDeleteByUserId(userIds);
         return ResultResponse.success();
     }

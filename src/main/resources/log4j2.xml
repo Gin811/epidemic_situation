@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="fatal">
-    <!--    &lt;!&ndash; 配置文件，放在resource目录下即可 &ndash;&gt;-->
-    <!--    <Properties>-->
-    <!--        &lt;!&ndash;mac的路径不用改，会自动将日志放在设定好目录下，windows开发者需要将路径改成自己的日志放置路径&ndash;&gt;-->
-    <!--        <Property name="baseDir"-->
-    <!--                  value="D:\Users\16975\myProjects\epidemic-management\src\main\java\com\yago\epidemic_management\log"/>-->
-    <!--    </Properties>-->
-    <!-- 配置文件，放在resource目录下即可 -->
     <Properties>
-        <!--mac的路径不用改，会自动将日志放在设定好目录下，windows开发者需要将路径改成自己的日志放置路径-->
+        <!--windows开发者需要将路径改成自己的日志放置路径;当前设定的位置是：当前程序根目录下的log文件夹-->
         <Property name="baseDir"
                   value="log"/>
     </Properties>
-
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->

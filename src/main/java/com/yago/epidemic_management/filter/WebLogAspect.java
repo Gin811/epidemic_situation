@@ -44,7 +44,6 @@ public class WebLogAspect {
         log.info("IP:" + request.getRemoteAddr());
         log.info("CLASS_METHOD:" + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getDeclaringTypeName());
         log.info("ARGS:" + Arrays.toString(joinPoint.getArgs()));
-
     }
 
     @AfterReturning(returning = "res", pointcut = "webLog()")

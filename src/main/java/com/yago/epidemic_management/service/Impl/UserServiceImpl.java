@@ -223,6 +223,11 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void batchDeleteEgressUser(Integer[] ids, Integer status) {
+        if (status == 1) {
+            status = 0;
+        } else {
+            status = 1;
+        }
         int count = userMapper.batchDeleteEgressUser(ids, status);
         if (count == 0) {
             throw new MyException(ExceptionEnum.DELETE_FAILED);

@@ -3,6 +3,7 @@
 <mapper namespace="com.yago.epidemic_management.model.dao.HodoMeterMapper">
     <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.HodoMeter">
         <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="cx_time" jdbcType="TIMESTAMP" property="cxTime"/>
         <result column="place" jdbcType="VARCHAR" property="place"/>

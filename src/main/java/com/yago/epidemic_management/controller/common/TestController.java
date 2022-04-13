@@ -33,6 +33,10 @@ public class TestController {
          * @return 文件路径
          */
 
+        //获得程序当前路径:System.getProperty(“user.dir”);
+        String path2 = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\uploadFile\\icons\\";
+        System.out.println("当前程序的绝对路劲：" + path2);
+
         System.out.println("uploadPath --> " + uploadPath);
         System.out.println("上下文2 --> " + request.getServletContext().getRealPath("/file"));
 

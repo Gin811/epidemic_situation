@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yago.epidemic_management.model.dao.GoodsMapper">
+    <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.Goods">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="goods_id" jdbcType="INTEGER" property="goodsId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="count" jdbcType="INTEGER" property="count"/>
+        <result column="del_count" jdbcType="INTEGER" property="del_count"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , goods_id, title, image, 'describe', count,del_count
+    </sql>
+    <select id="getGoodsAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from epidemic_situation_goods
+    </select>
+</mapper>

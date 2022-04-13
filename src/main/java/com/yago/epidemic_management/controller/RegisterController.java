@@ -71,7 +71,7 @@ public class RegisterController {
 
     @ApiOperation("批量删除个人健康信息")
     @PostMapping("/admin/register/batchDelete")
-    public ResultResponse batchDeleteRegisterUser(@RequestParam("ids") Integer[] ids) {
+    public ResultResponse batchDeleteRegisterUser(@RequestBody Integer[] ids) {
         registerService.batchDeleteRegisterUser(ids);
         return ResultResponse.success();
     }

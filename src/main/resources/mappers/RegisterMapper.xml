@@ -12,6 +12,7 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="tw" jdbcType="VARCHAR" property="tw"/>
         <result column="fourteen_day" jdbcType="VARCHAR" property="fourteenDay"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
     </resultMap>
     <sql id="Base_Column_List">
         id

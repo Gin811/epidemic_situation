@@ -70,8 +70,8 @@ public class HodoMeterController {
     }
 
     @ApiOperation("批量删除个人外出信息")
-    @GetMapping("/admin/odometer/deleteUsers")
-    public ResultResponse batchDeleteHodoMeterUser(@RequestParam("ids") Integer[] ids) {
+    @PostMapping("/admin/odometer/deleteUsers")
+    public ResultResponse batchDeleteHodoMeterUser(@RequestBody Integer[] ids) {
         hodoMeterService.deleteUsers(ids);
         return ResultResponse.success();
     }

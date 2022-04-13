@@ -170,8 +170,15 @@
         SELECT user.username, user.mobile, ret.*
         FROM epidemic_situation_return AS ret
                  inner join epidemic_situation_user AS user
-        on user.user_id = ret.user_id
+        on user.user_id = ret.user_id and ret.status="未审核"
     </select>
+    <select id="selectReviewedAll" resultMap="ReturnUserVo">
+        SELECT user.username, user.mobile, ret.*
+        FROM epidemic_situation_return AS ret
+                 inner join epidemic_situation_user AS user
+        on user.user_id = ret.user_id and ret.status="已审核"
+    </select>
+
     <select id="selectByUserName" parameterType="string" resultMap="ReturnUserVo">
         SELECT user.username, user.mobile, ret.*
         FROM epidemic_situation_return AS ret

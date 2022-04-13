@@ -131,7 +131,7 @@ public class AdminController {
      */
     @ApiOperation("批量设置用户禁用")
     @PostMapping("/admin/batchDeleteEgressUser")
-    public ResultResponse batchDeleteEgressUser(@RequestParam Integer[] ids, @RequestParam Integer status) {
+    public ResultResponse batchDeleteEgressUser(@RequestBody Integer[] ids, @RequestParam Integer status) {
         userService.batchDeleteEgressUser(ids, status);
         return ResultResponse.success();
     }

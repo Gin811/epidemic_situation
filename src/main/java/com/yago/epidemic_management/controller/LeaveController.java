@@ -121,7 +121,7 @@ public class LeaveController {
      */
     @ApiOperation("批量删除外出人员")
     @PostMapping("/admin/leave/batchDeleteEgressUser")
-    public ResultResponse batchDeleteEgressUser(@RequestParam("ids") Integer[] ids) {
+    public ResultResponse batchDeleteEgressUser(@RequestBody Integer[] ids) {
         leaveService.batchDeleteEgressUser(ids);
         return ResultResponse.success();
     }

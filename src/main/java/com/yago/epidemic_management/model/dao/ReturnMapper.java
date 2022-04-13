@@ -25,6 +25,9 @@ public interface ReturnMapper {
 
     List<ReturnUserVo> selectAll();
 
+    List<ReturnUserVo> selectReviewedAll();
+
+
     ReturnUserVo selectByUserName(@Param("userName") String userName);
 
     Return selectByUserId(@Param("userId") Integer userId);
