@@ -13,7 +13,7 @@ import java.util.Date;
 public class AddIconDto {
     private Integer iconId;
 
-    @NotNull(message = "userID不能为空")
+    @NotNull(message = "userId不能为空")
     private Integer userId;
 
     @NotNull(message = "iconUrl不能为空")
@@ -21,7 +21,6 @@ public class AddIconDto {
 
     private Integer isActivity;
 
-    @NotNull(message = "更新时间不能为空")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date lastUpdate;
 

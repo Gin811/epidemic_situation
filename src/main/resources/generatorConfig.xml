@@ -70,10 +70,16 @@
         <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
         <!--               selectByExampleQueryId="false">-->
         <!--        </table>-->
-        <table tableName="epidemic_situation_icon" domainObjectName="Icon"
+        <!--        <table tableName="epidemic_situation_icon" domainObjectName="Icon"-->
+        <!--               enableCountByExample="false"-->
+        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--               selectByExampleQueryId="false">-->
+        <!--        </table>-->
+        <table tableName="epidemic_situation_return" domainObjectName="Return"
                enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
+
     </context>
 </generatorConfiguration>

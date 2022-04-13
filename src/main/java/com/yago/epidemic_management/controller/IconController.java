@@ -3,6 +3,7 @@ package com.yago.epidemic_management.controller;
 import com.yago.epidemic_management.model.dto.add.AddIconDto;
 import com.yago.epidemic_management.model.pojo.Icon;
 import com.yago.epidemic_management.service.IconService;
+import com.yago.epidemic_management.service.OssService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -34,11 +35,23 @@ public class IconController {
 
     @Autowired
     IconService iconService;
+    @Autowired
+    OssService ossService;
 
     // 单文件上传
     @ApiOperation("单文件上传")
-    @RequestMapping("/file/upload")
-    public Object fileUpload(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request) {
+    @RequestMapping(value = ("/file/upload"), headers = ("content-type=multipart/*"), method = RequestMethod.POST)
+    public Object fileUpload(@RequestParam("file") MultipartFile multipartFile) {
+
+//        //oos上传图片
+//        String path = ossService.uploadFile(multipartFile);
+//        Map<String, Object> map = new HashMap();
+//        map.put("status", 200);
+//        map.put("msg", "成功");
+//        map.put("data", path);
+//        return map;
+
+        //本机上传图片
         Map<String, Object> map = new HashMap();
         map.put("status", 10000);
         map.put("msg", "上传成功");
@@ -100,6 +113,7 @@ public class IconController {
         return map;
     }
 
+    @ApiOperation("上传路径到数据库")
     @RequestMapping("/add")
     public Map addIcon(@Validated @RequestBody AddIconDto addIconDto) {
         iconService.addIcon(addIconDto);

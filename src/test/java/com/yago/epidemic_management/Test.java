@@ -1,5 +1,7 @@
 package com.yago.epidemic_management;
 
+import java.util.Date;
+
 /**
  * @Author: Yago
  * @Date: 2022/3/22 19:31
@@ -7,13 +9,8 @@ package com.yago.epidemic_management;
  **/
 public class Test {
     public static void main(String[] args) {
-        int a = 2;
-        Object o = a;
-        if (o instanceof Byte) {
-            System.out.println("ttttt");
-        } else {
-            System.out.println(false);
-        }
+        Date date = new Date();
+        System.out.println(date);
 
     }
 }

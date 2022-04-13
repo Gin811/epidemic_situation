@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yago.epidemic_management.model.dao.ReturnMapper">
+
+    <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.Return">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="bz" jdbcType="VARCHAR" property="bz"/>
+        <result column="stzk" jdbcType="VARCHAR" property="stzk"/>
+        <result column="fourteen_day" jdbcType="VARCHAR" property="fourteenDay"/>
+    </resultMap>
+
+    <resultMap type="com.yago.epidemic_management.model.vo.ReturnUserVo" id="ReturnUserVo">
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="bz" jdbcType="VARCHAR" property="bz"/>
+        <result column="stzk" jdbcType="VARCHAR" property="stzk"/>
+        <result column="fourteen_day" jdbcType="VARCHAR" property="fourteenDay"/>
+        <result column="id" javaType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        id
+        , user_id, content, `status`, create_time, bz, stzk, fourteen_day
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from epidemic_situation_return
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from epidemic_situation_return
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.Return">
+        insert into epidemic_situation_return (id, user_id, content, `status`,
+                                               create_time, bz,
+                                               stzk, fourteen_day)
+        values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{bz,jdbcType=VARCHAR},
+                #{stzk,jdbcType=VARCHAR}, #{fourteenDay,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.Return">
+        insert into epidemic_situation_return
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId !=null">
+                user_id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="bz != null">
+                bz,
+            </if>
+            <if test="stzk != null">
+                stzk,
+            </if>
+            <if test="fourteenDay != null">
+                fourteen_day,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId !=null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bz != null">
+                #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="stzk != null">
+                #{stzk,jdbcType=VARCHAR},
+            </if>
+            <if test="fourteenDay != null">
+                #{fourteenDay,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yago.epidemic_management.model.pojo.Return">
+        update epidemic_situation_return
+        <set>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bz != null">
+                bz = #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="stzk != null">
+                stzk = #{stzk,jdbcType=VARCHAR},
+            </if>
+            <if test="fourteenDay != null">
+                fourteen_day = #{fourteenDay,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByUserIdSelective" parameterType="integer">
+        update epidemic_situation_return
+        <set>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bz != null">
+                bz = #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="stzk != null">
+                stzk = #{stzk,jdbcType=VARCHAR},
+            </if>
+            <if test="fourteenDay != null">
+                fourteen_day = #{fourteenDay,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.yago.epidemic_management.model.pojo.Return">
+        update epidemic_situation_return
+        set content = #{content,jdbcType=VARCHAR},
+            user_id =#{userId,jdbcType=INTEGER} `status`     = #{status,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            bz = #{bz,jdbcType=VARCHAR},
+            stzk = #{stzk,jdbcType=VARCHAR},
+            fourteen_day = #{fourteenDay,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectAll" resultMap="ReturnUserVo">
+        SELECT user.username, user.mobile, ret.*
+        FROM epidemic_situation_return AS ret
+                 inner join epidemic_situation_user AS user
+        on user.user_id = ret.user_id
+    </select>
+    <select id="selectByUserName" parameterType="string" resultMap="ReturnUserVo">
+        SELECT user.username, user.mobile, ret.*
+        FROM epidemic_situation_return AS ret
+                 inner join epidemic_situation_user AS user
+        on user.user_id = ret.user_id and user.username=#{userName,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByUserId" parameterType="integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from epidemic_situation_return where user_id=#{userId,jdbcType=INTEGER}
+    </select>
+    <delete id="dateleByUserId" parameterType="integer">
+        delete
+        from epidemic_situation_return
+        where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+    <delete id="batchDeleteByUserId">
+        delete from epidemic_situation_return
+        where user_id in
+        <foreach collection="userIds" open="(" item="userId" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+</mapper>

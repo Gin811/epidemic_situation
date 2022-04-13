@@ -2,6 +2,7 @@ package com.yago.epidemic_management.model.dao;
 
 import com.yago.epidemic_management.model.pojo.Icon;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface IconMapper {
@@ -18,4 +19,6 @@ public interface IconMapper {
     int updateByPrimaryKey(Icon record);
 
     Icon selectByUserId(Integer userId);
+
+    int updateActivityByuserId(@Param("userId") Integer userId);
 }

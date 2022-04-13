@@ -10,6 +10,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * @Author: YaGo
  * @Date: 2022/4/9 22:42
@@ -24,8 +26,17 @@ public class IconServiceIpml implements IconService {
     public void addIcon(AddIconDto addIconDto) {
         Icon icon = new Icon();
         BeanUtils.copyProperties(addIconDto, icon);
-        int count = iconMapper.insertSelective(icon);
-        if (count == 0) {
+        Icon icon1 = iconMapper.selectByPrimaryKey(icon.getUserId());
+        if (icon1 != null) {
+            iconMapper.updateActivityByuserId(icon.getUserId());
+        }
+        icon.setIsActivity(1);
+        if (icon.getLastUpdate() == null) {
+            Date date = new Date();
+            icon.setLastUpdate(date);
+        }
+        int count1 = iconMapper.insertSelective(icon);
+        if (count1 == 0) {
             throw new MyException(ExceptionEnum.INSERT_FAILED);
         }
     }

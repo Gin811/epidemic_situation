@@ -25,7 +25,6 @@ public class TestController {
     @GetMapping("/hello")
     public String hello(HttpServletRequest request) {
 
-
         /**
          * 获取文件路径
          *
@@ -33,7 +32,6 @@ public class TestController {
          * @param fileName 文件名称
          * @return 文件路径
          */
-
 
         System.out.println("uploadPath --> " + uploadPath);
         System.out.println("上下文2 --> " + request.getServletContext().getRealPath("/file"));
@@ -45,6 +43,8 @@ public class TestController {
             String path = ResourceUtils.getURL("classpath:").getPath();
             System.out.println("ResourceUtils.getURL.getPath --> " + path);
 
+            String path1 = System.getProperty("user.dir");
+            System.out.println("程序当前路径 --> " + path1);
             System.out.println("当前项目的绝对路径 --> " + new File("").getAbsolutePath());
             System.out.println("upload 绝对路径 --> " + new File("upload").getAbsolutePath());
             System.out.println("/upload 绝对路径 --> " + new File("/upload").getAbsolutePath());

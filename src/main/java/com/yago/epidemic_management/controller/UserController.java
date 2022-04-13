@@ -1,6 +1,5 @@
 package com.yago.epidemic_management.controller;
 
-import com.yago.epidemic_management.common.Constant;
 import com.yago.epidemic_management.common.ResultResponse;
 import com.yago.epidemic_management.exception.ExceptionEnum;
 import com.yago.epidemic_management.model.dto.update.UpdateUserDto;
@@ -116,14 +115,12 @@ public class UserController {
      * 普通用户注册
      *
      * @param user1
-     * @param request
-     * @param response
      * @return
      */
     @ApiOperation("用户登录")
     @PostMapping("/login")
     @ResponseBody
-    public ResultResponse login(@RequestBody Map<String, String> user1, HttpServletRequest request, HttpServletResponse response) {
+    public ResultResponse login(@RequestBody Map<String, String> user1) {
         String mobile = user1.get("mobile");
         String password = user1.get("password");
         //1.校验：判断用户名是否为空
@@ -154,9 +151,9 @@ public class UserController {
 //        if (session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER) == null) {
 //            return ResultResponse.error(ExceptionEnum.NO_USER);
 //        }
-        System.out.println("session为：" + session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER));
-        session.removeAttribute(Constant.MPIDEMICMANAGEMENT_USER);
-        System.out.println("session为：" + session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER));
+//        System.out.println("session为：" + session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER));
+//        session.removeAttribute(Constant.MPIDEMICMANAGEMENT_USER);
+//        System.out.println("session为：" + session.getAttribute(Constant.MPIDEMICMANAGEMENT_USER));
         return ResultResponse.success();
     }
 

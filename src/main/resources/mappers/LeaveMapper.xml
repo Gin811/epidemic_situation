@@ -131,6 +131,7 @@
         select
         <include refid="Base_Column_List"/>
         from epidemic_situation_leave
+        where stu="已审核"
     </select>
     <select id="selectApplications" resultMap="BaseResultMap">
         select

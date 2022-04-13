@@ -45,14 +45,14 @@ public class MyMvcConfig implements WebMvcConfigurer {
         //配置swagger的映射路径【http://localhost:8081/swagger-ui.html】
 //        registry.addResourceHandler("swagger-ui.html")
 //                .addResourceLocations("classpath:/META-INF/resources/");
-//
-//        registry.addResourceHandler("/webjars/**")
-//                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+        //获得程序当前路径:System.getProperty(“user.dir”);
+        String path = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\uploadFile\\icons\\";
 
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/")
                 .addResourceLocations("classpath:/templates/")
-                .addResourceLocations("file:" + "/uploadFile/icons/")
+                .addResourceLocations("file:" + "path")
                 .addResourceLocations("classpath:/META-INF/resources/");
     }
 
@@ -63,22 +63,18 @@ public class MyMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //定义排除swagger访问的路径配置
-        String[] swaggerExcludes = new String[]{"/error", "/static/**", "/doc.html", "/favicon.ico", "/swagger-ui.html", "/swagger-resources/**"};
+        //定义排除的访问路径配置
+        String[] excludePath = new String[]{"/error", "/static/**", "/doc.html", "/favicon.ico", "/swagger-ui.html", "/swagger-resources/**"};
+        String[] addPath = new String[]{"/icon/**", "/user/**", "/register/**", "/leave/**", "/info/**", "/odometer/**"};
 
+        //登录拦截
         registry.addInterceptor(getLoginInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/login")  //开放登录路径
-                .excludePathPatterns("/adminLogin")     //开放登录路径
-                .excludePathPatterns("/admin/**")   //开放角色路径，避免重复校验
-                .excludePathPatterns("/register")
-                .excludePathPatterns("/icon/**")
-                .excludePathPatterns("/uploadFile/**")
-                .excludePathPatterns(swaggerExcludes);   //开放注册路径
+                .addPathPatterns(addPath)   //增加拦截路径
+                .excludePathPatterns(excludePath);   //开放注册路径
 
+        //管理权限拦截器
         registry.addInterceptor(getRoleInterceptor())
-                .addPathPatterns("/admin/**")   //拦截admin下的所有路径
-                .excludePathPatterns("/static/**");  //开放静态资源
+                .addPathPatterns("/admin/**");   //拦截admin下的所有请求
 
     }
 }
