@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yago.epidemic_management.model.dao.BigDataMapper">
+    <!--查询近七天离开人数-->
+    <select id="selectByDayLeaveAll" resultType="com.yago.epidemic_management.model.dos.SevenDayDo">
+        SELECT
+        COUNT(*) AS 'count',
+        DATE_FORMAT(wc_time,'%Y-%m-%d') AS date
+        FROM
+        epidemic_situation_leave
+        WHERE
+        stu="已审核"
+        and
+        DATE_FORMAT(wc_time, '%Y-%m-%d') IN
+        <foreach collection="list" item="sevenDate" separator="," open="(" close=")">
+            #{sevenDate}
+        </foreach>
+        GROUP BY
+        DATE_FORMAT(wc_time, '%Y-%m-%d')
+        ORDER BY
+        DATE_FORMAT(wc_time, '%Y-%m-%d') DESC;
+    </select>
+    <!--查询近七天返回人数-->
+    <select id="selectByDayReturnAll" resultType="com.yago.epidemic_management.model.dos.SevenDayDo">
+        SELECT
+        COUNT(*) AS 'count',
+        DATE_FORMAT(create_time,'%Y-%m-%d') AS date
+        FROM
+        epidemic_situation_return
+        WHERE
+        status="已审核"
+        and
+        DATE_FORMAT(create_time, '%Y-%m-%d') IN
+        <foreach collection="list" item="sevenDate" separator="," open="(" close=")">
+            #{sevenDate}
+        </foreach>
+        GROUP BY
+        DATE_FORMAT(create_time, '%Y-%m-%d')
+        ORDER BY
+        DATE_FORMAT(create_time, '%Y-%m-%d') DESC;
+    </select>
+    <select id="selectCountHouse" parameterType="string" resultType="java.util.Map">
+        ${sql}
+    </select>
+</mapper>

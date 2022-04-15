@@ -6,6 +6,7 @@ import com.yago.epidemic_management.model.pojo.Goods;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,15 +17,17 @@ import java.util.List;
  * Description:
  **/
 @RestController
+@RequestMapping("/goods")
 public class GoodsController {
 
     @Autowired
     GoodsMapper goodsMapper;
 
     @ApiOperation("查询所有商品")
-    @GetMapping("goods/getAllGoods")
+    @GetMapping("/getAllGoods")
     public ResultResponse getAllGoods() {
         List<Goods> goodsList = goodsMapper.getGoodsAll();
         return ResultResponse.success(goodsList);
     }
+
 }

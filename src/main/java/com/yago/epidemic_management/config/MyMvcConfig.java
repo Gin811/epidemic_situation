@@ -68,9 +68,9 @@ public class MyMvcConfig implements WebMvcConfigurer {
         String[] addPath = new String[]{"/icon/**", "/user/**", "/register/**", "/leave/**", "/info/**", "/odometer/**"};
 
         //登录拦截
-        registry.addInterceptor(getLoginInterceptor())
-                .addPathPatterns(addPath)   //增加拦截路径
-                .excludePathPatterns(excludePath);   //开放注册路径
+//        registry.addInterceptor(getLoginInterceptor())
+//                .addPathPatterns(addPath)   //增加拦截路径
+//                .excludePathPatterns(excludePath);   //开放注册路径
 
         //管理权限拦截器
         registry.addInterceptor(getRoleInterceptor())
