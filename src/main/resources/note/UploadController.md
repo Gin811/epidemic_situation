@@ -213,7 +213,7 @@ public class UploadController {
 }
 ```
 
-# 项目
+# 项目后端
 
 ```java
 package com.yago.epidemic_management.controller;
@@ -323,4 +323,53 @@ public Object fileUpload(@RequestParam("file") MultipartFile multipartFile) {
         }
 }
 
+```
+
+# 项目前端
+
+## 表格上传
+
+```html
+ <el-form-item label="更换头像">
+              <!--头像上传-->
+              <el-upload :auto-upload="false" :limit="1" :on-change="handleelchange" action="" list-type="picture-card">
+                <i class="el-icon-plus"></i>
+              </el-upload>
+              <el-button size="small" type="primary" @click="uploadImg">点击上传</el-button>
+            </el-form-item>
+```
+
+## 上传逻辑
+
+```javascript
+//保存当前上传图片
+    handleelchange(file, fileList) {
+      console.log(file, fileList)
+      let formdata = new FormData()
+      fileList.map(item => { //fileList本来就是数组，就不用转为真数组了
+        formdata.append("file", item.raw)  //将每一个文件图片都加进formdata
+      })
+      this.fataData = formdata;
+    }
+    //保存到数据库
+    uploadImg() {
+      // console.log(this.imgUpUrl,'头像上传路径')
+      // console.log(this.fataData,'上传的fatadata')
+      this.$axios.post(this.imgUpUrl, this.fataData).then(res => {
+        if (res.data.status === 10000) {
+          const path = res.data.path
+          console.log(path,'返回的path')
+          this.imgUrl = this.$store.state.ip.api + path;
+          this.$axios.post('/icon/add', {userId: this.user.userId, iconUrl: path}).then(res => {
+            // console.log(res,'图片在数据库的路径')
+            if (res.data.status === 10000) {
+              this.$message.success(res.data.msg);
+            } else {
+              this.$message.error("添加失败")
+            }
+          })
+        }
+      })
+      this.fataData = '';
+    }
 ```

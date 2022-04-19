@@ -16,7 +16,8 @@
         select
         <include refid="Base_Column_List"/>
         from epidemic_situation_icon
-        where icon_id = #{iconId,jdbcType=INTEGER}
+        where user_id = #{userId,jdbcType=VARCHAR}
+        and is_activity=1
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
@@ -86,7 +87,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.yago.epidemic_management.model.pojo.Icon">
         update epidemic_situation_icon
-        set user_id     = #{userId,jdbcType=INTEGER},
+        set user_id     = #{userId,jdbcType=VARCHAR},
             icon_url    = #{iconUrl,jdbcType=VARCHAR},
             is_activity = #{isActivity,jdbcType=INTEGER},
             last_update = #{lastUpdate,jdbcType=TIMESTAMP}
@@ -96,12 +97,11 @@
         select
         <include refid="Base_Column_List"></include>
         from epidemic_situation_icon
-        where user_id=#{userId,jdbcType=INTEGER} and is_activity=1
+        where user_id=#{userId,jdbcType=VARCHAR} and is_activity=1
     </select>
     <update id="updateActivityByuserId">
         update epidemic_situation_icon
         set is_activity = 0
         where user_id = #{userId}
-
     </update>
 </mapper>

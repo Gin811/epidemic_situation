@@ -14,7 +14,7 @@ public interface UserMapper {
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer id);
+    User selectByPrimaryKey(String userId);
 
     int updateByPrimaryKeySelective(User record);
 
@@ -30,7 +30,7 @@ public interface UserMapper {
 
     List<User> selectAdminList();
 
-    int deleteUserByUserId(@Param("id") Integer id);
+    int deleteUserByUserId(@Param("userId") String userId);
 
-    int batchDeleteEgressUser(@Param("ids") Integer[] ids, @Param("status") Integer newStatus);
+    int batchDeleteEgressUser(@Param("ids") String[] ids, @Param("status") Integer newStatus);
 }

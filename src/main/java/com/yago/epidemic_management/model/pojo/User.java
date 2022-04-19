@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class User {
-    private Integer userId;
+    private String userId;
 
     private String username;
 
     private String password;
 
-    private String salt;
+    private String address;
 
     private String email;
 
@@ -19,18 +19,16 @@ public class User {
 
     private Integer status;
 
-    private Long createUserId;
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private String token;
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -50,12 +48,12 @@ public class User {
         this.password = password;
     }
 
-    public String getSalt() {
-        return salt;
+    public String getAddress() {
+        return address;
     }
 
-    public void setSalt(String salt) {
-        this.salt = salt;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() {
@@ -80,14 +78,6 @@ public class User {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public Long getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(Long createUserId) {
-        this.createUserId = createUserId;
     }
 
     public Date getCreateTime() {

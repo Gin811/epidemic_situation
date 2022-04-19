@@ -38,31 +38,32 @@ public class IconController {
     @Autowired
     OssService ossService;
 
-    // 单文件上传
-    @ApiOperation("单文件上传")
+    // OOS单文件上传
+    @ApiOperation("OOS单文件上传")
+    @RequestMapping(value = ("/oosFile/upload"), headers = ("content-type=multipart/*"), method = RequestMethod.POST)
+    public Object OOSFileUpload(@RequestParam("file") MultipartFile multipartFile) {
+        String path = ossService.uploadFile(multipartFile);
+        Map<String, Object> map = new HashMap();
+        map.put("status", 200);
+        map.put("msg", "成功");
+        map.put("data", path);
+        return map;
+    }
+
+    //本机上传图片
+    @ApiOperation("本机单文件上传")
     @RequestMapping(value = ("/file/upload"), headers = ("content-type=multipart/*"), method = RequestMethod.POST)
     public Object fileUpload(@RequestParam("file") MultipartFile multipartFile) {
 
-//        //oos上传图片
-//        String path = ossService.uploadFile(multipartFile);
-//        Map<String, Object> map = new HashMap();
-//        map.put("status", 200);
-//        map.put("msg", "成功");
-//        map.put("data", path);
-//        return map;
-
-        //本机上传图片
         Map<String, Object> map = new HashMap();
         map.put("status", 10000);
         map.put("msg", "上传成功");
-
         if (multipartFile.isEmpty()) {
             map.put("status", 10019);
             map.put("msg", "空文件");
             map.put("data", null);
             return map;
         }
-
         // 获取文件名
         String fileName = multipartFile.getOriginalFilename();
         if ("".equals(fileName)) {
@@ -80,9 +81,7 @@ public class IconController {
         String newFileName = uuid + subName;
         System.out.println("保存的文件的新名字: " + newFileName);
 
-        // 获取年月日的日期格式
-        //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //String format = simpleDateFormat.format(new Date());
+        // 保存在icons文件夹下
         String format = "icons";
 
         // 生成文件路径
@@ -99,9 +98,8 @@ public class IconController {
         File file = new File(readPath.getAbsolutePath() + File.separator + newFileName);
         try {
             multipartFile.transferTo(file);
-
             // 获取存储路径:http://localhost:8081/uploadFile/icons/df828716-fbd8-42df-94d3-41b7292afeca.jpg
-//            String filePath = getUploadPath(request, format + "/" + newFileName);
+
             String filePath = uploadPath + "/" + format + "/" + newFileName;
             map.put("path", filePath);
         } catch (IOException e) {
@@ -127,7 +125,7 @@ public class IconController {
     }
 
     @GetMapping("/queryIcon")
-    public Map<String, Object> queryIcon(@RequestParam Integer userId) {
+    public Map<String, Object> queryIcon(@RequestParam String userId) {
         Icon icon = iconService.queryIcon(userId);
         Map<String, Object> map = new HashMap<>();
         map.put("status", 10000);

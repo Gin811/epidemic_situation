@@ -7,7 +7,10 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class AddReturn {
-    private Integer id;
+    @NotBlank(message = "姓名不能为空")
+    private String userName;
+    @NotBlank(message = "号码不能为空")
+    private String mobile;
 
     @NotBlank(message = "申请信息不能为空")
     private String content;
@@ -18,22 +21,25 @@ public class AddReturn {
 
     private String bz;
 
-
-    @NotNull(message = "userId不能为空")
-    private Integer userId;
-
     private String stzk;
 
     @NotBlank(message = "近14天不能为空")
     private String fourteenDay;
 
-
-    public Integer getId() {
-        return id;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getContent() {
@@ -44,13 +50,6 @@ public class AddReturn {
         this.content = content == null ? null : content.trim();
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 
     public Date getCreateTime() {
         return createTime;

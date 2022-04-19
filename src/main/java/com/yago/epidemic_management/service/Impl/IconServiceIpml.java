@@ -26,6 +26,7 @@ public class IconServiceIpml implements IconService {
     public void addIcon(AddIconDto addIconDto) {
         Icon icon = new Icon();
         BeanUtils.copyProperties(addIconDto, icon);
+
         Icon icon1 = iconMapper.selectByPrimaryKey(icon.getUserId());
         if (icon1 != null) {
             iconMapper.updateActivityByuserId(icon.getUserId());
@@ -42,7 +43,7 @@ public class IconServiceIpml implements IconService {
     }
 
     @Override
-    public Icon queryIcon(Integer userId) {
+    public Icon queryIcon(String userId) {
         Icon icon = iconMapper.selectByUserId(userId);
         if (icon == null) {
             throw new MyException(ExceptionEnum.NO_RECORD);

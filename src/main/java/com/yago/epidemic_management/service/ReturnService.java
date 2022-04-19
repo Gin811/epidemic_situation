@@ -2,8 +2,8 @@ package com.yago.epidemic_management.service;
 
 import com.github.pagehelper.PageInfo;
 import com.yago.epidemic_management.model.dto.add.AddReturn;
+import com.yago.epidemic_management.model.dto.update.UpdateReturn;
 import com.yago.epidemic_management.model.pojo.Return;
-import com.yago.epidemic_management.model.vo.ReturnUserVo;
 
 /**
  * @Author: YaGo
@@ -15,15 +15,15 @@ public interface ReturnService {
 
     PageInfo getReviewedReturnList(Integer pageNum, Integer pageSize);
 
-    ReturnUserVo getReturnUserByName(String userName);
+    Return getReturnUserByName(String userName);
 
     void addReturn(AddReturn addReturn);
 
-    Return updateReturn(AddReturn addReturn);
+    Return updateReturn(UpdateReturn updateReturn);
 
     void updateReturnStatus(Integer userId);
 
-    void dateleByUserId(Integer userId);
+    void deleteById(Integer userId);
 
-    void batchDeleteByUserId(Integer[] userIds);
+    void batchDeleteById(Integer[] ids);
 }

@@ -2,43 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yago.epidemic_management.model.dao.UserMapper">
     <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.User">
-        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <id column="user_id" jdbcType="VARCHAR" property="userId"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
         <result column="status" jdbcType="TINYINT" property="status"/>
-        <result column="create_user_id" jdbcType="BIGINT" property="createUserId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
     </resultMap>
     <sql id="Base_Column_List">
         user_id
-        , username, `password`, salt, email, mobile, `status`, create_user_id, create_time
+        , username, `password`, address, email, mobile, `status`, create_time
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
         select user_id,
                username,
                email,
                mobile,
                `status`,
-               create_user_id,
                create_time
         from epidemic_situation_user
-        where user_id = #{id,jdbcType=INTEGER}
+        where user_id = #{userId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
         from epidemic_situation_user
-        where user_id = #{userId,jdbcType=INTEGER}
+        where user_id = #{userId,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.User">
         insert into epidemic_situation_user (user_id, username, `password`,
-                                             salt, email, mobile,
-                                             `status`, create_user_id, create_time)
-        values (#{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-                #{salt,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
-                #{status,jdbcType=TINYINT}, #{createUserId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP})
+                                             address, email, mobile,
+                                             `status`, create_time)
+        values (#{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+                #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+                #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.User">
         insert into epidemic_situation_user
@@ -52,8 +50,8 @@
             <if test="password != null">
                 `password`,
             </if>
-            <if test="salt != null">
-                salt,
+            <if test="address != null">
+                address,
             </if>
             <if test="email != null">
                 email,
@@ -63,9 +61,6 @@
             </if>
             <if test="status != null">
                 `status`,
-            </if>
-            <if test="createUserId != null">
-                create_user_id,
             </if>
             <if test="createTime != null">
                 create_time,
@@ -81,8 +76,8 @@
             <if test="password != null">
                 #{password,jdbcType=VARCHAR},
             </if>
-            <if test="salt != null">
-                #{salt,jdbcType=VARCHAR},
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
             </if>
             <if test="email != null">
                 #{email,jdbcType=VARCHAR},
@@ -92,9 +87,6 @@
             </if>
             <if test="status != null">
                 #{status,jdbcType=TINYINT},
-            </if>
-            <if test="createUserId != null">
-                #{createUserId,jdbcType=BIGINT},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
@@ -110,8 +102,8 @@
             <if test="password != null">
                 `password` = #{password,jdbcType=VARCHAR},
             </if>
-            <if test="salt != null">
-                salt = #{salt,jdbcType=VARCHAR},
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
             </if>
             <if test="email != null">
                 email = #{email,jdbcType=VARCHAR},
@@ -122,26 +114,22 @@
             <if test="status != null">
                 `status` = #{status,jdbcType=TINYINT},
             </if>
-            <if test="createUserId != null">
-                create_user_id = #{createUserId,jdbcType=BIGINT},
-            </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where user_id = #{userId,jdbcType=INTEGER}
+        where user_id = #{userId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.yago.epidemic_management.model.pojo.User">
         update epidemic_situation_user
-        set username       = #{username,jdbcType=VARCHAR},
-            `password`     = #{password,jdbcType=VARCHAR},
-            salt           = #{salt,jdbcType=VARCHAR},
-            email          = #{email,jdbcType=VARCHAR},
-            mobile         = #{mobile,jdbcType=VARCHAR},
-            `status`       = #{status,jdbcType=INTEGER},
-            create_user_id = #{createUserId,jdbcType=BIGINT},
-            create_time    = #{createTime,jdbcType=TIMESTAMP}
-        where user_id = #{userId,jdbcType=INTEGER}
+        set username    = #{username,jdbcType=VARCHAR},
+            `password`  = #{password,jdbcType=VARCHAR},
+            address     = #{address,jdbcType=VARCHAR},
+            email       = #{email,jdbcType=VARCHAR},
+            mobile      = #{mobile,jdbcType=VARCHAR},
+            `status`    = #{status,jdbcType=INTEGER},
+            create_time = #{createTime,jdbcType=TIMESTAMP}
+        where user_id = #{userId,jdbcType=VARCHAR}
     </update>
     <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -165,10 +153,10 @@
     <select id="selectList" resultMap="BaseResultMap">
         select user_id,
                username,
+               address,
                email,
                mobile,
                status,
-               create_user_id,
                create_time
         from epidemic_situation_user
         where status!=2
@@ -179,15 +167,14 @@
                email,
                mobile,
                status,
-               create_user_id,
                create_time
         from epidemic_situation_user
         where status = 2
     </select>
-    <delete id="deleteUserByUserId" parameterType="java.lang.Integer">
+    <delete id="deleteUserByUserId" parameterType="string">
         delete
         from epidemic_situation_user
-        where user_id = #{id}
+        where user_id = #{userId}
     </delete>
 
     <update id="batchDeleteEgressUser">
@@ -197,6 +184,6 @@
         <foreach collection="ids" open="(" item="id" separator="," close=")">
             #{id}
         </foreach>
-        and user_id!=1
+        and user_id!='202204181241244850a702c3c1682432fb096a48b7a233f09'
     </update>
 </mapper>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yago.epidemic_management.model.dao.CodeMapper">
+  <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.Code">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+    <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+    <result column="address" jdbcType="VARCHAR" property="address"/>
+    <result column="status" jdbcType="VARCHAR" property="status"/>
+    <result column="date" jdbcType="TIMESTAMP" property="date"/>
+    <result column="code_url" jdbcType="VARCHAR" property="codeUrl"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id
+    , user_id, mobile, address, `status`, `date`, code_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from epidemic_situation_code
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete
+    from epidemic_situation_code
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.Code">
+    insert into epidemic_situation_code (id, user_id, mobile,
+                                         address, `status`, `date`,
+                                         code_url)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+            #{address,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP},
+            #{codeUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.Code">
+    insert into epidemic_situation_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="date != null">
+        `date`,
+      </if>
+      <if test="codeUrl != null">
+        code_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="codeUrl != null">
+        #{codeUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yago.epidemic_management.model.pojo.Code">
+    update epidemic_situation_code
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        `date` = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="codeUrl != null">
+        code_url = #{codeUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByName" parameterType="string" resultType="com.yago.epidemic_management.model.vos.CodeVo">
+    SELECT user.username, user.mobile, code.address, code.`status`, code.date, code.code_url
+    from epidemic_situation_user user
+LEFT JOIN epidemic_situation_code code
+    on user.user_id=code.user_id
+    where username=#{userName}
+  </select>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.yago.epidemic_management.model.pojo.Code">
+    update epidemic_situation_code
+    set user_id  = #{userId,jdbcType=VARCHAR},
+        mobile   = #{mobile,jdbcType=VARCHAR},
+        address  = #{address,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=VARCHAR},
+        `date`   = #{date,jdbcType=TIMESTAMP},
+        code_url = #{codeUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllCodeList" resultType="com.yago.epidemic_management.model.vos.CodeVo">
+    SELECT code.id, user.username, code.address, user.mobile, code.`status`, code.date, code.code_url
+    from epidemic_situation_code code
+           LEFT JOIN epidemic_situation_user user
+    on code.user_id= user.user_id
+  </select>
+</mapper>

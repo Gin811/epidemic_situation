@@ -17,8 +17,8 @@ import java.util.Date;
  **/
 @Data
 public class AdminUpdateUserDto implements Serializable {
-    @NotNull(message = "userId不能为空")
-    private Integer userId;
+    @NotBlank(message = "userId不能为空")
+    private String userId;
 
     @NotBlank(message = "username不能为null")
     private String username;
@@ -31,10 +31,10 @@ public class AdminUpdateUserDto implements Serializable {
     @Size(min = 11, max = 11)
     private String mobile;
 
+    private String address;
+
     private Integer status;
 
-    @NotNull(message = "创建者id不能为空")
-    private Long createUserId;
 
     @NotNull(message = "更新时间不能为空")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

@@ -4,31 +4,19 @@
 
     <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.Return">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="user_id" jdbcType="INTEGER" property="userId"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="bz" jdbcType="VARCHAR" property="bz"/>
         <result column="stzk" jdbcType="VARCHAR" property="stzk"/>
         <result column="fourteen_day" jdbcType="VARCHAR" property="fourteenDay"/>
     </resultMap>
-
-    <resultMap type="com.yago.epidemic_management.model.vo.ReturnUserVo" id="ReturnUserVo">
-        <result column="user_id" jdbcType="INTEGER" property="userId"/>
-        <result column="content" jdbcType="VARCHAR" property="content"/>
-        <result column="status" jdbcType="VARCHAR" property="status"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="bz" jdbcType="VARCHAR" property="bz"/>
-        <result column="stzk" jdbcType="VARCHAR" property="stzk"/>
-        <result column="fourteen_day" jdbcType="VARCHAR" property="fourteenDay"/>
-        <result column="id" javaType="INTEGER" property="id"/>
-        <result column="username" jdbcType="VARCHAR" property="username"/>
-    </resultMap>
-
 
     <sql id="Base_Column_List">
         id
-        , user_id, content, `status`, create_time, bz, stzk, fourteen_day
+        ,user_name,mobile,content, `status`, create_time, bz, stzk, fourteen_day
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -42,10 +30,10 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.Return">
-        insert into epidemic_situation_return (id, user_id, content, `status`,
+        insert into epidemic_situation_return (user_name, mobile, content, `status`,
                                                create_time, bz,
                                                stzk, fourteen_day)
-        values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+        values (#{user_name}, #{mobile} #{content,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP}, #{bz,jdbcType=VARCHAR},
                 #{stzk,jdbcType=VARCHAR}, #{fourteenDay,jdbcType=VARCHAR})
     </insert>
@@ -55,8 +43,11 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="userId !=null">
-                user_id,
+            <if test="userName !=null">
+                user_name,
+            </if>
+            <if test="mobile !=null">
+                mobile,
             </if>
             <if test="content != null">
                 content,
@@ -81,8 +72,11 @@
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="userId !=null">
-                #{userId,jdbcType=INTEGER},
+            <if test="userName !=null">
+                #{userName},
+            </if>
+            <if test="mobile !=null">
+                #{mobile},
             </if>
             <if test="content != null">
                 #{content,jdbcType=VARCHAR},
@@ -125,13 +119,16 @@
             <if test="fourteenDay != null">
                 fourteen_day = #{fourteenDay,jdbcType=VARCHAR},
             </if>
-            <if test="userId != null">
-                user_id = #{userId,jdbcType=INTEGER},
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByUserIdSelective" parameterType="integer">
+    <update id="updateByIdSelective" parameterType="com.yago.epidemic_management.model.pojo.Return">
         update epidemic_situation_return
         <set>
             <if test="content != null">
@@ -152,54 +149,63 @@
             <if test="fourteenDay != null">
                 fourteen_day = #{fourteenDay,jdbcType=VARCHAR},
             </if>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile},
+            </if>
         </set>
-        where user_id = #{userId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
     </update>
 
     <update id="updateByPrimaryKey" parameterType="com.yago.epidemic_management.model.pojo.Return">
         update epidemic_situation_return
-        set content = #{content,jdbcType=VARCHAR},
-            user_id =#{userId,jdbcType=INTEGER} `status`     = #{status,jdbcType=VARCHAR},
+        set content   = #{content,jdbcType=VARCHAR},
+            user_name =#{userName},
+            mobile=#{mobile} `status`     = #{status,jdbcType=VARCHAR},
             create_time = #{createTime,jdbcType=TIMESTAMP},
             bz = #{bz,jdbcType=VARCHAR},
             stzk = #{stzk,jdbcType=VARCHAR},
             fourteen_day = #{fourteenDay,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <select id="selectAll" resultMap="ReturnUserVo">
-        SELECT user.username, user.mobile, ret.*
-        FROM epidemic_situation_return AS ret
-                 inner join epidemic_situation_user AS user
-        on user.user_id = ret.user_id and ret.status="未审核"
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT *
+        from epidemic_situation_return
+        where status = "未审核"
     </select>
-    <select id="selectReviewedAll" resultMap="ReturnUserVo">
-        SELECT user.username, user.mobile, ret.*
-        FROM epidemic_situation_return AS ret
-                 inner join epidemic_situation_user AS user
-        on user.user_id = ret.user_id and ret.status="已审核"
+    <select id="selectReviewedAll" resultMap="BaseResultMap">
+        SELECT *
+        FROM epidemic_situation_return
+        where status = "已审核"
     </select>
 
-    <select id="selectByUserName" parameterType="string" resultMap="ReturnUserVo">
-        SELECT user.username, user.mobile, ret.*
-        FROM epidemic_situation_return AS ret
-                 inner join epidemic_situation_user AS user
-        on user.user_id = ret.user_id and user.username=#{userName,jdbcType=VARCHAR}
+    <select id="selectByUserName" parameterType="string" resultMap="BaseResultMap">
+        SELECT *
+        FROM epidemic_situation_return
+        where user_name = #{userName,jdbcType=VARCHAR}
     </select>
-    <select id="selectByUserId" parameterType="integer" resultMap="BaseResultMap">
+    <select id="selectByPhone" parameterType="string" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"></include>
-        from epidemic_situation_return where user_id=#{userId,jdbcType=INTEGER}
+        from epidemic_situation_return where mobile=#{mobile}
     </select>
-    <delete id="dateleByUserId" parameterType="integer">
+    <select id="selectById" parameterType="integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from epidemic_situation_return where id=#{id}
+    </select>
+    <delete id="deleteById" parameterType="integer">
         delete
         from epidemic_situation_return
-        where user_id = #{userId,jdbcType=INTEGER}
+        where id = #{id}
     </delete>
-    <delete id="batchDeleteByUserId">
+    <delete id="batchDeleteById">
         delete from epidemic_situation_return
-        where user_id in
-        <foreach collection="userIds" open="(" item="userId" separator="," close=")">
-            #{userId}
+        where id in
+        <foreach collection="ids" open="(" item="id" separator="," close=")">
+            #{id}
         </foreach>
     </delete>
 </mapper>

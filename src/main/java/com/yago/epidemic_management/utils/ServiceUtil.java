@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @Author: YaGo
@@ -26,10 +27,20 @@ public class ServiceUtil {
         return dateList;
     }
 
+    //2.日期转为带格式字符串
     public static String dateToString(Date date) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String dateString = simpleDateFormat.format(date);
-        return dateString;
+        return simpleDateFormat.format(date);
+
     }
 
+    //3.生成时间戳UUID
+    public static String getTimeUuid() {
+        String uuidString = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+        //获取当前时间戳
+        long timeMillis = System.currentTimeMillis();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        String format = dateFormat.format(timeMillis);
+        return format + uuidString;
+    }
 }

@@ -3,8 +3,8 @@ package com.yago.epidemic_management.controller;
 import com.github.pagehelper.PageInfo;
 import com.yago.epidemic_management.common.ResultResponse;
 import com.yago.epidemic_management.model.dto.add.AddReturn;
+import com.yago.epidemic_management.model.dto.update.UpdateReturn;
 import com.yago.epidemic_management.model.pojo.Return;
-import com.yago.epidemic_management.model.vo.ReturnUserVo;
 import com.yago.epidemic_management.service.ReturnService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,7 @@ public class ReturnController {
     @ApiOperation("按名查询申请返回")
     @RequestMapping("/return/queryByName")
     public ResultResponse queryByName(@RequestParam String userName) {
-        ReturnUserVo user = returnService.getReturnUserByName(userName);
+        Return user = returnService.getReturnUserByName(userName);
         return ResultResponse.success(user);
     }
 
@@ -55,29 +55,29 @@ public class ReturnController {
 
     @ApiOperation("修改申请")
     @RequestMapping("/return/update")
-    public ResultResponse updateReturn(@Validated @RequestBody AddReturn addReturn) {
-        Return aReturn = returnService.updateReturn(addReturn);
+    public ResultResponse updateReturn(@Validated @RequestBody UpdateReturn updateReturn) {
+        Return aReturn = returnService.updateReturn(updateReturn);
         return ResultResponse.success(aReturn);
     }
 
-    @ApiOperation("根据用户ID修改审核状态")
+    @ApiOperation("根据ID修改审核状态")
     @RequestMapping("/admin/return/updateStatus")
-    public ResultResponse updateReturn(@RequestParam("userId") Integer userId) {
-        returnService.updateReturnStatus(userId);
+    public ResultResponse updateReturn(@RequestParam("id") Integer id) {
+        returnService.updateReturnStatus(id);
         return ResultResponse.success();
     }
 
     @ApiOperation("删除返回申请")
     @RequestMapping("/admin/return/delete")
-    public ResultResponse deleteByUserId(@RequestParam("userId") Integer userId) {
-        returnService.dateleByUserId(userId);
+    public ResultResponse deleteByUserId(@RequestParam("id") Integer id) {
+        returnService.deleteById(id);
         return ResultResponse.success();
     }
 
     @ApiOperation("批量删除返回申请")
     @RequestMapping("/admin/return/batchDelete")
-    public ResultResponse batchDeleteByUserId(@RequestBody Integer[] userIds) {
-        returnService.batchDeleteByUserId(userIds);
+    public ResultResponse batchDeleteById(@RequestBody Integer[] ids) {
+        returnService.batchDeleteById(ids);
         return ResultResponse.success();
     }
 }

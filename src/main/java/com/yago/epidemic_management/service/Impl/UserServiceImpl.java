@@ -10,6 +10,7 @@ import com.yago.epidemic_management.model.pojo.User;
 import com.yago.epidemic_management.service.UserService;
 import com.yago.epidemic_management.utils.JWTUtils;
 import com.yago.epidemic_management.utils.MD5Utils;
+import com.yago.epidemic_management.utils.ServiceUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,8 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public User selectByPrimaryKey(Integer id) {
-        return userMapper.selectByPrimaryKey(id);
+    public User selectByPrimaryKey(String userId) {
+        return userMapper.selectByPrimaryKey(userId);
     }
 
     @Override
@@ -64,6 +65,7 @@ public class UserServiceImpl implements UserService {
         //每个用户注册时，默认为普通用户
         user.setStatus(1);
         user.setCreateTime(new Date());
+        user.setUserId(ServiceUtil.getTimeUuid());
         try {
             user.setPassword(MD5Utils.getMD5Str(password));
         } catch (NoSuchAlgorithmException e) {
@@ -96,7 +98,7 @@ public class UserServiceImpl implements UserService {
             throw new MyException(ExceptionEnum.WRONG_PASSWORD);
         }
         //生成token
-        String token = JWTUtils.createToken(user.getUserId().toString());
+        String token = JWTUtils.createToken(user.getUserId());
         user.setToken(token);
         return user;
     }
@@ -117,7 +119,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean checkAdminRoleById(Integer userId) {
+    public boolean checkAdminRoleById(String userId) {
         User user = userMapper.selectByPrimaryKey(userId);
         return user.getStatus() == 2;
     }
@@ -165,6 +167,7 @@ public class UserServiceImpl implements UserService {
         //写到数据库
         User user = new User();
         BeanUtils.copyProperties(addUserDto, user);
+        user.setUserId(ServiceUtil.getTimeUuid());
         try {
             //直接输入密码不进行处理，存在安全隐患
             user.setPassword(MD5Utils.getMD5Str(user.getPassword()));
@@ -205,11 +208,11 @@ public class UserServiceImpl implements UserService {
     /**
      * 根据id删除用户
      *
-     * @param id
+     * @param userId
      */
     @Override
-    public void deleteUser(Integer id) {
-        int count = userMapper.deleteUserByUserId(id);
+    public void deleteUser(String userId) {
+        int count = userMapper.deleteUserByUserId(userId);
         if (count == 0) {
             throw new MyException(ExceptionEnum.DELETE_FAILED);
         }
@@ -222,7 +225,7 @@ public class UserServiceImpl implements UserService {
      * @param status
      */
     @Override
-    public void batchDeleteEgressUser(Integer[] ids, Integer status) {
+    public void batchDeleteEgressUser(String[] ids, Integer status) {
         if (status == 1) {
             status = 0;
         } else {

@@ -12,13 +12,13 @@ public interface IconMapper {
 
     int insertSelective(Icon record);
 
-    Icon selectByPrimaryKey(Integer inconId);
+    Icon selectByPrimaryKey(String userId);
 
     int updateByPrimaryKeySelective(Icon record);
 
     int updateByPrimaryKey(Icon record);
 
-    Icon selectByUserId(Integer userId);
+    Icon selectByUserId(String userId);
 
-    int updateActivityByuserId(@Param("userId") Integer userId);
+    int updateActivityByuserId(@Param("userId") String userId);
 }

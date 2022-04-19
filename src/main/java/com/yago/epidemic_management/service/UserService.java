@@ -10,7 +10,7 @@ import com.yago.epidemic_management.model.pojo.User;
  * Description:
  **/
 public interface UserService {
-    User selectByPrimaryKey(Integer id);
+    User selectByPrimaryKey(String id);
 
     User selectByName(String username);
 
@@ -20,7 +20,7 @@ public interface UserService {
 
     boolean checkAdminRole(User user);
 
-    boolean checkAdminRoleById(Integer userId);
+    boolean checkAdminRoleById(String userId);
 
     PageInfo userListForAdmin(Integer pageNum, Integer pageSize);
 
@@ -30,7 +30,7 @@ public interface UserService {
 
     void update(User updateUser);
 
-    void deleteUser(Integer id);
+    void deleteUser(String userId);
 
-    void batchDeleteEgressUser(Integer[] ids, Integer status);
+    void batchDeleteEgressUser(String[] ids, Integer status);
 }

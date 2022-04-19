@@ -1,7 +1,6 @@
 package com.yago.epidemic_management.model.dao;
 
 import com.yago.epidemic_management.model.pojo.Return;
-import com.yago.epidemic_management.model.vo.ReturnUserVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,22 +16,24 @@ public interface ReturnMapper {
 
     Return selectByPrimaryKey(Integer id);
 
-    int updateByUserIdSelective(Return record);
+    int updateByIdSelective(Return record);
 
     int updateByPrimaryKeySelective(Return record);
 
     int updateByPrimaryKey(Return record);
 
-    List<ReturnUserVo> selectAll();
+    List<Return> selectAll();
 
-    List<ReturnUserVo> selectReviewedAll();
+    List<Return> selectReviewedAll();
 
 
-    ReturnUserVo selectByUserName(@Param("userName") String userName);
+    Return selectByUserName(@Param("userName") String userName);
 
-    Return selectByUserId(@Param("userId") Integer userId);
+    Return selectByPhone(@Param("mobile") String mobile);
 
-    int dateleByUserId(@Param("userId") Integer userId);
+    Return selectById(@Param("id") Integer id);
 
-    int batchDeleteByUserId(@Param("userIds") Integer[] userIds);
+    int deleteById(@Param("id") Integer id);
+
+    int batchDeleteById(@Param("ids") Integer[] ids);
 }

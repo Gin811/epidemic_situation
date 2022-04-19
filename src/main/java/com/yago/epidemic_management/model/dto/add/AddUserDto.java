@@ -20,7 +20,6 @@ public class AddUserDto {
     @NotBlank(message = "username不能为null")
     private String username;
 
-    @NotBlank(message = "password不能为null")
     private String password;
 
     @Email(message = "邮箱格式不对")
@@ -32,10 +31,8 @@ public class AddUserDto {
     @NotNull(message = "状态不能为空")
     private Integer status;
 
-    @NotNull(message = "创建者id不能为空")
-    private Long createUserId;
+    private String address;
 
-    @NotNull(message = "创建时间不能为空")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 }

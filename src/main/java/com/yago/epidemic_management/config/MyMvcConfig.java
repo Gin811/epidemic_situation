@@ -1,5 +1,6 @@
 package com.yago.epidemic_management.config;
 
+import com.yago.epidemic_management.common.Constant;
 import com.yago.epidemic_management.interceptor.LoginInterceptor;
 import com.yago.epidemic_management.interceptor.RoleInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -47,13 +48,16 @@ public class MyMvcConfig implements WebMvcConfigurer {
 //                .addResourceLocations("classpath:/META-INF/resources/");
 
         //获得程序当前路径:System.getProperty(“user.dir”);
-        String path = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\uploadFile\\icons\\";
+        String path = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\uploadFile\\";
 
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/")
                 .addResourceLocations("classpath:/templates/")
-                .addResourceLocations("file:" + "path")
+                .addResourceLocations("file:" + path)
                 .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/goods/**")
+                .addResourceLocations("file:" + Constant.goodsUpLoad);
     }
 
     /**

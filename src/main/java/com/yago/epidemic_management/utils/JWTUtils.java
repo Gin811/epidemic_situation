@@ -24,6 +24,7 @@ import java.util.Date;
  */
 
 @Component
+//扫描yaml属性赋值
 @ConfigurationProperties(prefix = "jwt")
 public class JWTUtils {
 

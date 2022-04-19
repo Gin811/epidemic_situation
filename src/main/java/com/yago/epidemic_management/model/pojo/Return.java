@@ -1,16 +1,21 @@
 package com.yago.epidemic_management.model.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Return {
     private Integer id;
 
-    private Integer userId;
+    private String userName;
+
+    private String mobile;
 
     private String content;
 
     private String status;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     private String bz;
@@ -19,12 +24,20 @@ public class Return {
 
     private String fourteenDay;
 
-    public Integer getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public Integer getId() {

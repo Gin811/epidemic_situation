@@ -7,12 +7,12 @@ package com.yago.epidemic_management.model.pojo;
  **/
 public class Goods {
     private Integer id;
-    private Integer goodsId;
+    private String goodsId;
     private String title;
     private String image;
-    private String describe;
+    private String describes;
     private Integer count;
-    private Integer del_count;
+    private Integer delCount;
 
     public Integer getId() {
         return id;
@@ -39,12 +39,12 @@ public class Goods {
         this.image = image;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescribes() {
+        return describes;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescribes(String describes) {
+        this.describes = describes;
     }
 
     public Integer getCount() {
@@ -55,19 +55,19 @@ public class Goods {
         this.count = count;
     }
 
-    public Integer getDel_count() {
-        return del_count;
+    public Integer getDelCount() {
+        return delCount;
     }
 
-    public void setDel_count(Integer del_count) {
-        this.del_count = del_count;
+    public void setDelCount(Integer delCount) {
+        this.delCount = delCount;
     }
 
-    public Integer getGoodsId() {
+    public String getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(Integer goodsId) {
+    public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
     }
 }

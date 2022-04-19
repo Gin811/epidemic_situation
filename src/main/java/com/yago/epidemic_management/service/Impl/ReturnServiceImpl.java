@@ -6,8 +6,8 @@ import com.yago.epidemic_management.exception.ExceptionEnum;
 import com.yago.epidemic_management.exception.MyException;
 import com.yago.epidemic_management.model.dao.ReturnMapper;
 import com.yago.epidemic_management.model.dto.add.AddReturn;
+import com.yago.epidemic_management.model.dto.update.UpdateReturn;
 import com.yago.epidemic_management.model.pojo.Return;
-import com.yago.epidemic_management.model.vo.ReturnUserVo;
 import com.yago.epidemic_management.service.ReturnService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,23 +29,23 @@ public class ReturnServiceImpl implements ReturnService {
     @Override
     public PageInfo getReturnList(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<ReturnUserVo> returns = returnMapper.selectAll();
-        PageInfo<ReturnUserVo> pageInfo = new PageInfo<>(returns);
+        List<Return> returns = returnMapper.selectAll();
+        PageInfo<Return> pageInfo = new PageInfo<>(returns);
         return pageInfo;
     }
 
     @Override
     public PageInfo getReviewedReturnList(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<ReturnUserVo> returns = returnMapper.selectReviewedAll();
-        PageInfo<ReturnUserVo> pageInfo = new PageInfo<>(returns);
+        List<Return> returns = returnMapper.selectReviewedAll();
+        PageInfo<Return> pageInfo = new PageInfo<>(returns);
         return pageInfo;
     }
 
 
     @Override
-    public ReturnUserVo getReturnUserByName(String userName) {
-        ReturnUserVo aReturn = returnMapper.selectByUserName(userName);
+    public Return getReturnUserByName(String userName) {
+        Return aReturn = returnMapper.selectByUserName(userName);
         if (aReturn == null) {
             throw new MyException(ExceptionEnum.NO_RECORD);
         }
@@ -54,7 +54,7 @@ public class ReturnServiceImpl implements ReturnService {
 
     @Override
     public void addReturn(AddReturn addReturn) {
-        Return aReturn1 = returnMapper.selectByUserId(addReturn.getUserId());
+        Return aReturn1 = returnMapper.selectByPhone(addReturn.getMobile());
         if (aReturn1 != null) {
             throw new MyException(ExceptionEnum.RECORD_EXITED);
         }
@@ -68,10 +68,10 @@ public class ReturnServiceImpl implements ReturnService {
     }
 
     @Override
-    public Return updateReturn(AddReturn addReturn) {
+    public Return updateReturn(UpdateReturn updateReturn) {
         Return aReturn = new Return();
-        BeanUtils.copyProperties(addReturn, aReturn);
-        int count = returnMapper.updateByUserIdSelective(aReturn);
+        BeanUtils.copyProperties(updateReturn, aReturn);
+        int count = returnMapper.updateByIdSelective(aReturn);
         if (count == 0) {
             throw new MyException(ExceptionEnum.UPDATE_FAILED);
         }
@@ -79,8 +79,8 @@ public class ReturnServiceImpl implements ReturnService {
     }
 
     @Override
-    public void updateReturnStatus(Integer userId) {
-        Return aReturn = returnMapper.selectByUserId(userId);
+    public void updateReturnStatus(Integer id) {
+        Return aReturn = returnMapper.selectById(id);
         if (aReturn == null) {
             throw new MyException(ExceptionEnum.NO_RECORD);
         }
@@ -92,7 +92,7 @@ public class ReturnServiceImpl implements ReturnService {
                 aReturn.setStatus("已审核");
                 break;
         }
-        int count = returnMapper.updateByUserIdSelective(aReturn);
+        int count = returnMapper.updateByIdSelective(aReturn);
         if (count == 0) {
             throw new MyException(ExceptionEnum.UPDATE_FAILED);
         }
@@ -100,14 +100,14 @@ public class ReturnServiceImpl implements ReturnService {
     }
 
     @Override
-    public void dateleByUserId(Integer userId) {
-        returnMapper.dateleByUserId(userId);
+    public void deleteById(Integer userId) {
+        returnMapper.deleteById(userId);
         return;
     }
 
     @Override
-    public void batchDeleteByUserId(Integer[] userIds) {
-        returnMapper.batchDeleteByUserId(userIds);
+    public void batchDeleteById(Integer[] ids) {
+        returnMapper.batchDeleteById(ids);
         return;
     }
 }

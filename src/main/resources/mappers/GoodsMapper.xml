@@ -3,20 +3,38 @@
 <mapper namespace="com.yago.epidemic_management.model.dao.GoodsMapper">
     <resultMap id="BaseResultMap" type="com.yago.epidemic_management.model.pojo.Goods">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="goods_id" jdbcType="INTEGER" property="goodsId"/>
+        <result column="goods_id" jdbcType="VARCHAR" property="goodsId"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="image" jdbcType="VARCHAR" property="image"/>
-        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="describes" jdbcType="VARCHAR" property="describes"/>
         <result column="count" jdbcType="INTEGER" property="count"/>
-        <result column="del_count" jdbcType="INTEGER" property="del_count"/>
+        <result column="del_count" jdbcType="INTEGER" property="delCount"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , goods_id, title, image, 'describe', count,del_count
+        , goods_id, title, image, describes, count,del_count
     </sql>
     <select id="getGoodsAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"></include>
         from epidemic_situation_goods
     </select>
+    <delete id="deleteByGoodsId">
+        delete
+        from epidemic_situation_goods
+        where goods_id = #{goodsId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.Goods">
+        insert into epidemic_situation_goods
+            (goods_id, title, image, describes, count, del_count)
+        values (#{goodsId}, #{title}, #{image}, #{describes}, #{count}, #{delCount})
+    </insert>
+    <update id="updateByGoodsId" parameterType="com.yago.epidemic_management.model.pojo.Goods">
+        update epidemic_situation_goods
+        set title=#{title},
+            describes= #{describes},
+            count=#{count},
+            del_count=#{delCount}
+        where goods_id = #{goodsId}
+    </update>
 </mapper>

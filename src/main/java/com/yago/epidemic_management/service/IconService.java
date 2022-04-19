@@ -11,5 +11,5 @@ import com.yago.epidemic_management.model.pojo.Icon;
 public interface IconService {
     void addIcon(AddIconDto addIconDto);
 
-    Icon queryIcon(Integer userId);
+    Icon queryIcon(String userId);
 }

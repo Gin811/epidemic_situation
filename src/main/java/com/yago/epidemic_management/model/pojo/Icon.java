@@ -13,7 +13,7 @@ import java.util.Date;
 public class Icon {
     private Integer iconId;
 
-    private Integer userId;
+    private String userId;
 
     private String iconUrl;
 
@@ -30,11 +30,11 @@ public class Icon {
         this.iconId = iconId;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

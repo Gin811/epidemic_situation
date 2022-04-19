@@ -49,8 +49,8 @@ public class RoleInterceptor implements HandlerInterceptor {
         }
 
         //4.验证是不是管理员
-        int userid = Integer.parseInt(sub);
-        boolean adminRole = userService.checkAdminRoleById(userid);
+//        int userid = String.parseInt(sub);
+        boolean adminRole = userService.checkAdminRoleById(sub);
         if (!adminRole) {
 //            Map<String,Object> noRole=new HashMap<>();
 //            noRole.put("msg","not Role");

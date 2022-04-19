@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: YaGo
@@ -56,6 +53,7 @@ public class BigDataServiceImpl implements BigDataService {
                 }
                 newList.add(sevenDayDo);
             }
+            Collections.reverse(newList);
             return newList;
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,6 +99,7 @@ public class BigDataServiceImpl implements BigDataService {
                 }
                 newList.add(sevenDayDo);
             }
+            Collections.reverse(newList);
             return newList;
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,7 +114,7 @@ public class BigDataServiceImpl implements BigDataService {
      */
     @Override
     public List<Map> selectCountHouse() {
-        String sql = "SELECT left(salt,1) Num,count(*) Sum FROM epidemic_situation_user GROUP BY left(salt,1)";
+        String sql = "SELECT left(address,1) Num,count(*) Sum FROM epidemic_situation_user GROUP BY left(address,1)";
         List<Map> maps = bigDataMapper.selectCountHouse(sql);
         return maps;
     }

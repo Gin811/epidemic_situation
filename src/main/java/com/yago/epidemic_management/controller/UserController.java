@@ -10,7 +10,6 @@ import com.yago.epidemic_management.utils.JWTUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,7 @@ import java.util.Map;
  * @Date: 2022/3/22 10:30
  * Description:
  **/
-@Controller
+@RestController
 @CrossOrigin
 public class UserController {
     @Autowired

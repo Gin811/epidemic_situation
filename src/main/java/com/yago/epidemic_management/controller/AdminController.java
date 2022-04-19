@@ -75,7 +75,7 @@ public class AdminController {
      */
     @ApiOperation("单个用户详情")
     @GetMapping("/user/userDetail")
-    public ResultResponse userDetail(@RequestParam Integer userId) {
+    public ResultResponse userDetail(@RequestParam String userId) {
         User user = userService.selectByPrimaryKey(userId);
         return ResultResponse.success(user);
     }
@@ -104,7 +104,7 @@ public class AdminController {
      * http://127.0.0.1:8081/user/delete/1    【Restful风格】
      */
     @PostMapping("/admin/user/delete/{userId}")
-    public ResultResponse deleteUser(@PathVariable Integer userId) {
+    public ResultResponse deleteUser(@PathVariable String userId) {
         System.out.println(userId);
         userService.deleteUser(userId);
         return ResultResponse.success();
@@ -131,7 +131,7 @@ public class AdminController {
      */
     @ApiOperation("批量设置用户禁用")
     @PostMapping("/admin/batchDeleteEgressUser")
-    public ResultResponse batchDeleteEgressUser(@RequestBody Integer[] ids, @RequestParam Integer status) {
+    public ResultResponse batchDeleteEgressUser(@RequestBody String[] ids, @RequestParam Integer status) {
         userService.batchDeleteEgressUser(ids, status);
         return ResultResponse.success();
     }
