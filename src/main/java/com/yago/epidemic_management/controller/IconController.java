@@ -42,7 +42,7 @@ public class IconController {
     @ApiOperation("OOS单文件上传")
     @RequestMapping(value = ("/oosFile/upload"), headers = ("content-type=multipart/*"), method = RequestMethod.POST)
     public Object OOSFileUpload(@RequestParam("file") MultipartFile multipartFile) {
-        String path = ossService.uploadFile(multipartFile);
+        String path = ossService.uploadIcon(multipartFile);
         Map<String, Object> map = new HashMap();
         map.put("status", 200);
         map.put("msg", "成功");
@@ -115,7 +115,6 @@ public class IconController {
     @RequestMapping("/add")
     public Map addIcon(@Validated @RequestBody AddIconDto addIconDto) {
         iconService.addIcon(addIconDto);
-
         Map<String, Object> map = new HashMap<>();
         map.put("status", 10000);
         map.put("msg", "添加成功");

@@ -6,15 +6,27 @@ spring:
     url: jdbc:mysql://172.24.52.19:3306/epidemic?useSSL=true&useUnicode=true&characterEncoding=UTF-8
     username: epidemic
     password: 6kcXWkZmtthiftS3
+
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
 
 mybatis:
   mapper-locations: classpath:mappers/*.xml
+
 jwt:
   header: "Authorization" #token返回头部
   tokenPrefix: "Bearer " #token前缀
   secret: "qwertyuiop7418520" #秘钥
   expireTime: 30 #token有效时间（分钟）建议一小时上
+
 file:
   uploadPath: /uploadFile

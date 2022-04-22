@@ -2,6 +2,7 @@ package com.yago.epidemic_management.model.dto.add;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -13,8 +14,8 @@ import java.util.Date;
 public class AddIconDto {
     private Integer iconId;
 
-    @NotNull(message = "userId不能为空")
-    private Integer userId;
+    @NotBlank(message = "userId不能为空")
+    private String userId;
 
     @NotNull(message = "iconUrl不能为空")
     private String iconUrl;
@@ -32,11 +33,11 @@ public class AddIconDto {
         this.iconId = iconId;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

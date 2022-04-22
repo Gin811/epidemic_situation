@@ -8,6 +8,7 @@ spring:
     url: jdbc:mysql://localhost:3306/epidemic_situation?useSSL=true&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: root
+
   servlet:
     #文件大小 MB必须大写
     multipart:
@@ -22,6 +23,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mappers/*.xml
+
 jwt:
   header: "Authorization" #token返回头部
   tokenPrefix: "Bearer " #token前缀
