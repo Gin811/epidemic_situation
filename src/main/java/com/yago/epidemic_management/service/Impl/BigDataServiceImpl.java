@@ -118,4 +118,15 @@ public class BigDataServiceImpl implements BigDataService {
         List<Map> maps = bigDataMapper.selectCountHouse(sql);
         return maps;
     }
+
+    /**
+     * 按类型统计隔离人数
+     *
+     * @return
+     */
+    @Override
+    public Map selectDivide() {
+        Map map = bigDataMapper.selectDivide();
+        return map;
+    }
 }

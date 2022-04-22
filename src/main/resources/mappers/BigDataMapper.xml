@@ -42,4 +42,8 @@
     <select id="selectCountHouse" parameterType="string" resultType="java.util.Map">
         ${sql}
     </select>
+    <select id="selectDivide" resultType="java.util.LinkedHashMap">
+        select count(status1) status1, count(status2) status2, count(status3) status3, count(bz) bz, count(*) hole
+        FROM epidemic_situation_divide
+    </select>
 </mapper>

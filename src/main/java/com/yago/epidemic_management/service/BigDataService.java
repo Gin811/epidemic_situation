@@ -17,4 +17,6 @@ public interface BigDataService {
     List<SevenDayDo> selectByDayReturnAll();
 
     List<Map> selectCountHouse();
+
+    Map selectDivide();
 }

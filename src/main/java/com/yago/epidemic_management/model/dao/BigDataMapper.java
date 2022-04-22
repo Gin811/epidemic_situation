@@ -20,4 +20,6 @@ public interface BigDataMapper {
 
     List<Map> selectCountHouse(@Param("sql") String sql);
 
+    Map selectDivide();
+
 }

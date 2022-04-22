@@ -44,5 +44,10 @@ public class BigDataController {
         return ResultResponse.success(maps);
     }
 
-
+    @ApiOperation("按类型统计隔离人数")
+    @GetMapping("/selectDivide")
+    public ResultResponse selectDivide() {
+        Map map = bigDataService.selectDivide();
+        return ResultResponse.success(map);
+    }
 }
