@@ -167,7 +167,8 @@
                email,
                mobile,
                status,
-               create_time
+               create_time,
+               address
         from epidemic_situation_user
         where status = 2
     </select>
