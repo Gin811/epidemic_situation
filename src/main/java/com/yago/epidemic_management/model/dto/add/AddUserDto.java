@@ -35,4 +35,6 @@ public class AddUserDto {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
+    private String user_id;
 }

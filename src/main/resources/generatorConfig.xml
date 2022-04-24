@@ -52,34 +52,33 @@
         </javaClientGenerator>
 
         <!--生成对应表及类名-->
-        <!--        <table schema="root" tableName="epidemic_situation_hodometer" domainObjectName="HodoMeter"-->
-        <!--               enableCountByExample="false"-->
-        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--               selectByExampleQueryId="false">-->
-        <!--        </table>-->
-        <!--        <table tableName="epidemic_situation_leave" domainObjectName="Leave" enableCountByExample="false"-->
-        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--               selectByExampleQueryId="false">-->
-        <!--        </table>-->
-        <!--        <table tableName="epidemic_situation_register" domainObjectName="Register" enableCountByExample="false"-->
-        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--               selectByExampleQueryId="false">-->
-        <!--        </table>-->
-        <!--        <table tableName="epidemic_situation_user" domainObjectName="User"-->
-        <!--               enableCountByExample="false"-->
-        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--               selectByExampleQueryId="false">-->
-        <!--        </table>-->
-        <!--        <table tableName="epidemic_situation_icon" domainObjectName="Icon"-->
-        <!--               enableCountByExample="false"-->
-        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--               selectByExampleQueryId="false">-->
-        <!--        </table>-->
+        <table schema="root" tableName="epidemic_situation_hodometer" domainObjectName="HodoMeter"
+               enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="epidemic_situation_leave" domainObjectName="Leave" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="epidemic_situation_register" domainObjectName="Register" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="epidemic_situation_user" domainObjectName="User"
+               enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="epidemic_situation_icon" domainObjectName="Icon"
+               enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
         <table tableName="epidemic_situation_divide" domainObjectName="Divide"
                enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-
     </context>
 </generatorConfiguration>

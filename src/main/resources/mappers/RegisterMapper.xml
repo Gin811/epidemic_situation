@@ -12,11 +12,11 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="tw" jdbcType="VARCHAR" property="tw"/>
         <result column="fourteen_day" jdbcType="VARCHAR" property="fourteenDay"/>
-        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
     </resultMap>
     <sql id="Base_Column_List">
         id
-        , `name`, phone, szd, stzk, grjc, bz, create_time, tw, fourteen_day
+        , `name`, phone, szd, stzk, grjc, bz, create_time, tw, fourteen_day,user_id
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -32,11 +32,11 @@
     <insert id="insert" parameterType="com.yago.epidemic_management.model.pojo.Register">
         insert into epidemic_situation_register (id, `name`, phone,
                                                  szd, stzk, grjc, bz,
-                                                 create_time, tw, fourteen_day)
+                                                 create_time, tw, fourteen_day, user_id)
         values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
                 #{szd,jdbcType=VARCHAR}, #{stzk,jdbcType=VARCHAR}, #{grjc,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP}, #{tw,jdbcType=VARCHAR},
-                #{fourteenDay,jdbcType=VARCHAR})
+                #{fourteenDay,jdbcType=VARCHAR}), #{userId}
     </insert>
     <insert id="insertSelective" parameterType="com.yago.epidemic_management.model.pojo.Register">
         insert into epidemic_situation_register
@@ -71,6 +71,9 @@
             <if test="fourteenDay != null">
                 fourteen_day,
             </if>
+            <if test="userId != null">
+                user_id,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -102,6 +105,9 @@
             </if>
             <if test="fourteenDay != null">
                 #{fourteenDay,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>

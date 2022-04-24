@@ -5,8 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.yago.epidemic_management.exception.ExceptionEnum;
 import com.yago.epidemic_management.exception.MyException;
 import com.yago.epidemic_management.model.dao.RegisterMapper;
+import com.yago.epidemic_management.model.dao.UserMapper;
 import com.yago.epidemic_management.model.pojo.Register;
+import com.yago.epidemic_management.model.pojo.User;
 import com.yago.epidemic_management.service.RegisterService;
+import com.yago.epidemic_management.utils.ServiceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,9 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Autowired
     RegisterMapper registerMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public PageInfo getRegisterList(Integer pageNum, Integer pageSize) {
@@ -61,6 +67,13 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     public void addRegisterUser(Register register) {
+
+        User user = userMapper.selectByMobile(register.getPhone());
+        if (user == null) {
+            register.setUserId(ServiceUtil.getTimeUuid());
+        } else {
+            register.setUserId(user.getUserId());
+        }
         int count = registerMapper.insertSelective(register);
         if (count == 0) {
             throw new MyException(ExceptionEnum.INSERT_FAILED);
