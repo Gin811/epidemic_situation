@@ -46,7 +46,7 @@ public class DivideServiceImpl implements DivideService {
     @Override
     public PageInfo getDivideList(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Divide> divides = divideMapper.selectBypage(pageNum, pageSize);
+        List<Divide> divides = divideMapper.selectBypage();
         PageInfo<Divide> dividePageInfo = new PageInfo<>(divides);
         return dividePageInfo;
     }
@@ -100,7 +100,26 @@ public class DivideServiceImpl implements DivideService {
     }
 
     @Override
+    public PageInfo getDivideHistory(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Divide> divideList = divideMapper.selectHistory();
+        PageInfo<Divide> pageInfo = new PageInfo(divideList);
+        return pageInfo;
+    }
+
+    @Override
+    public void updateDivide(Divide divide) {
+        int count = divideMapper.updateByPrimaryKeySelective(divide);
+        if (count == 0) {
+            throw new MyException(ExceptionEnum.UPDATE_FAILED);
+        }
+    }
+
+
+    @Override
     public void deleteByUserId(String userId) {
         divideMapper.deleteByUserId(userId);
     }
+
+
 }

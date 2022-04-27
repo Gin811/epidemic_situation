@@ -15,7 +15,7 @@ import java.util.UUID;
  **/
 public class ServiceUtil {
 
-    //1.获取近七天日期
+    //1.获取近14天日期
     public static List<String> getSevenDate() {
         List<String> dateList = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

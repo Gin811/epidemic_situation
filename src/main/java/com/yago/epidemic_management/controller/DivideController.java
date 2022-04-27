@@ -34,6 +34,13 @@ public class DivideController {
         return ResultResponse.success(divideList);
     }
 
+    @ApiOperation("所有隔离人员历史")
+    @GetMapping("/admin/divide/getDivideHistory")
+    public ResultResponse getDivideHistory(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize) {
+        PageInfo divideList = divideService.getDivideHistory(pageNum, pageSize);
+        return ResultResponse.success(divideList);
+    }
+
     @ApiOperation("根据条件查询隔离人员列表")
     @PostMapping("/admin/divide/getDivideListByCondition")
     public ResultResponse getDivideListByCondition(@RequestBody Map<String, Object> map) {
@@ -45,11 +52,17 @@ public class DivideController {
         }
     }
 
+    @ApiOperation("根据用户id更新隔离人员")
+    @PostMapping("/divide/updateDivide")
+    public ResultResponse updateDivide(@RequestBody Divide divide) {
+        divideService.updateDivide(divide);
+        return ResultResponse.success();
+    }
+
     @ApiOperation("根据用户id删除隔离人员列表")
     @GetMapping("/admin/divide/deleteByUserId")
     public ResultResponse deleteByUserId(@RequestParam("userId") String userId) {
         divideService.deleteByUserId(userId);
         return ResultResponse.success();
-
     }
 }

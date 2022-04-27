@@ -76,6 +76,19 @@ public class LeaveController {
         return ResultResponse.success(leave);
     }
 
+    /**
+     * 根据姓名查询单个外出人员
+     *
+     * @param username
+     * @return
+     */
+    @ApiOperation("根据姓名查询单个外出人员")
+    @GetMapping("/leave/egressUserByName")
+    public ResultResponse egressUserByName(@RequestParam String username) {
+        Leave leave = leaveService.selectByName(username);
+        return ResultResponse.success(leave);
+    }
+
     @ApiOperation("更新外出人员信息")
     @PostMapping("/leave/updateUser")
     public ResultResponse updateUser(@Validated @RequestBody UpdateLeaveDto leaveDto) {

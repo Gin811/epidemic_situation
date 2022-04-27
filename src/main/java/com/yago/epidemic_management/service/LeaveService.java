@@ -24,4 +24,5 @@ public interface LeaveService {
     void deleteEgressUser(Integer id);
 
     void batchDeleteEgressUser(Integer[] ids);
+
 }

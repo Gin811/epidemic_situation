@@ -114,7 +114,7 @@ public class BigDataServiceImpl implements BigDataService {
      */
     @Override
     public List<Map> selectCountHouse() {
-        String sql = "SELECT left(address,1) Num,count(*) Sum FROM epidemic_situation_user GROUP BY left(address,1)";
+        String sql = "SELECT left(address,1) Num,count(*) Sum FROM epidemic_situation_user GROUP BY left(address,1) ORDER BY Num";
         List<Map> maps = bigDataMapper.selectCountHouse(sql);
         return maps;
     }

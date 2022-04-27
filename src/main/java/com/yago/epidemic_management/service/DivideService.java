@@ -17,5 +17,9 @@ public interface DivideService {
 
     Object getDivideListByCondition(Map<String, Object> map);
 
+    void updateDivide(Divide divide);
+
     void deleteByUserId(String userId);
+
+    PageInfo getDivideHistory(Integer pageNum, Integer pageSize);
 }
