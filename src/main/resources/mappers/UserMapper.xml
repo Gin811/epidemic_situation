@@ -17,6 +17,7 @@
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap">
         select user_id,
+               address,
                username,
                email,
                mobile,

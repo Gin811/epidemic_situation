@@ -34,5 +34,6 @@ file:
   uploadPath: /uploadFile
   goodsUpLoad: D:\新建文件夹
 #取值：
-#1.@ConfigurationProperties(prefix = "file")
-#2.@Value("${file.uploadPath}")
+#1.@Component
+#2.@ConfigurationProperties(prefix = "file")
+#3.@Value("${file.uploadPath}")

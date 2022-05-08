@@ -69,7 +69,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //定义排除的访问路径配置
         String[] excludePath = new String[]{"/error", "/static/**", "/doc.html", "/favicon.ico", "/swagger-ui.html", "/swagger-resources/**"};
-        String[] addPath = new String[]{"/icon/**", "/user/**", "/register/**", "/leave/**", "/info/**", "/odometer/**", "/bigData/**", "/code/**", "/divide/**", "/goods/**"};
+        String[] addPath = new String[]{"/icon/**", "/user/**", "/leave/**", "/info/**", "/odometer/**", "/bigData/**", "/code/**", "/divide/**", "/goods/**"};
 
         //登录拦截
         registry.addInterceptor(getLoginInterceptor())
