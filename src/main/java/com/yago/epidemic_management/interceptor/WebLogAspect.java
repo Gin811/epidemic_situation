@@ -1,4 +1,4 @@
-package com.yago.epidemic_management.filter;
+package com.yago.epidemic_management.interceptor;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

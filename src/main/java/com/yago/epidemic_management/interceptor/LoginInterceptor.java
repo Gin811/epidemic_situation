@@ -16,13 +16,27 @@ import javax.servlet.http.HttpServletResponse;
  **/
 public class LoginInterceptor implements HandlerInterceptor {
 
+    /**
+     * @param request
+     * @param response
+     * @param handler  SpringMVC会将请求通过处理器映射器将请求交给匹配的Handler处理，这个handler参数就是描述的处理请求的Handler。
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
         //1.http的header中获得token
         String token = request.getHeader("token");
 //        System.out.println("Login登录拦截器：" + token);
+
         if (!(handler instanceof HandlerMethod)) {
             return true;
+        } else {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            System.out.println("当前拦截的方法为：" + handlerMethod.getMethod().getName());
+            System.out.println("当前拦截的方法的全路劲：" + handlerMethod.getBean().getClass().getName());
+            System.out.println("拦截的uri为：" + request.getRequestURI());
         }
         //token不存在
         if (token == null || token.equals("")) throw new MyException(ExceptionEnum.NEED_LOGIN);
