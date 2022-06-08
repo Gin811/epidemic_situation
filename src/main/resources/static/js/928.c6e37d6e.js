@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkepidemic_management_vue"]=self["webpackChunkepidemic_management_vue"]||[]).push([[928],{8928:function(e,n,t){t.r(n),t.d(n,{default:function(){return s}});var u=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[e._v("222")])},a=[],c={name:"Test"},i=c,r=t(1001),l=(0,r.Z)(i,u,a,!1,null,"37702238",null),s=l.exports}}]);
+//# sourceMappingURL=928.c6e37d6e.js.map

@@ -1,0 +1,9 @@
+.el-tooltip__popper {
+    max-width: 20%
+}
+
+.el-tooltip__popper, .el-tooltip__popper.is-dark {
+    background: #304156 !important;
+    color: #fff !important;
+    line-height: 24px
+}

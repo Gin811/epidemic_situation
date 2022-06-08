@@ -24,6 +24,7 @@ import java.util.Arrays;
 @Aspect     //定义一个切面
 @Component       //让spring识别到这个类
 public class WebLogAspect {
+
     private final Logger log = LoggerFactory.getLogger(WebLogAspect.class);
 
     //1.指定拦截点

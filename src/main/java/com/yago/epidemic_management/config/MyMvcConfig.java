@@ -5,10 +5,7 @@ import com.yago.epidemic_management.interceptor.LoginInterceptor;
 import com.yago.epidemic_management.interceptor.RoleInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
@@ -35,10 +32,15 @@ public class MyMvcConfig implements WebMvcConfigurer {
     }
 
     @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("index");
+    }
+
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
         /*
-         * addResourceHandler:访问映射路径
+         * addResourceHandler：访问映射路径
          * addResourceLocations：资源绝对路径
          * file: 当前项目的根目录
          */

@@ -38,7 +38,7 @@ public class IconController {
     @Autowired
     OssService ossService;
 
-    // OOS单文件上传
+    // OSS单文件上传
     @ApiOperation("OOS单文件上传")
     @RequestMapping(value = ("/oosFile/upload"), headers = ("content-type=multipart/*"), method = RequestMethod.POST)
     public Object OOSFileUpload(@RequestParam("file") MultipartFile multipartFile) {

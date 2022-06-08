@@ -3,6 +3,7 @@ server:
 spring:
   profiles:
     active:
+
   # DataSource Config
   datasource:
     url: jdbc:mysql://localhost:3306/epidemic_situation?useSSL=true&useUnicode=true&characterEncoding=UTF-8
